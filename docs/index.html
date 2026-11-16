@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root { color-scheme: light; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 14px; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+</style>
+<title>Since the Midterms</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="A day-by-day record of major national events since the November 3, 2026 U.S. midterm elections.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout (from the Figma frame): 1312px column with 64px gutters. Sections share a two-column grid:
+   a 176px label column (day stamps, section names) and a wide content column. */
+:root {
+  --paper: #eef1f5;
+  --sheet: #f9fafc;
+  --ink: #141c2b;
+  --ink-2: #4a5568;
+  --rule: #d3d9e3;
+  --accent: #1f4fd1;
+  --accent-ink: #ffffff;
+  --shadow: 0 4px 4px -4px rgba(12, 12, 13, 0.05), 0 16px 32px -4px rgba(12, 12, 13, 0.10);
+
+  --c-elections: #1f4fd1;
+  --c-congress: #7a3fb8;
+  --c-whitehouse: #b0322a;
+  --c-courts: #2f6b4f;
+  --c-iran: #a65d00;
+  --c-economy: #0e7490;
+  --c-disaster: #5b6474;
+  --c-world: #b5306b;
+  --seat-uncalled: #9aa5b8;
+
+  --f-display: "Anton", "Impact", "Arial Narrow", sans-serif;
+  --f-body: "DM Sans", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --gutter: clamp(16px, 4.4vw, 64px);
+  --label-col: 176px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0e131c; --sheet: #151c28; --ink: #e6eaf2; --ink-2: #9aa5b8; --rule: #2a3445; --accent: #7f9dff; --accent-ink: #0e131c;
+    --shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.3), 0 16px 32px -4px rgba(0, 0, 0, 0.45);
+    --c-elections: #7f9dff; --c-congress: #c39bf0; --c-whitehouse: #f08a80; --c-courts: #7cc9a2;
+    --c-iran: #f0b35c; --c-economy: #5cc6dd; --c-disaster: #a5afc0; --c-world: #f28dbb; --seat-uncalled: #4a5568;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0e131c; --sheet: #151c28; --ink: #e6eaf2; --ink-2: #9aa5b8; --rule: #2a3445; --accent: #7f9dff; --accent-ink: #0e131c;
+  --shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.3), 0 16px 32px -4px rgba(0, 0, 0, 0.45);
+  --c-elections: #7f9dff; --c-congress: #c39bf0; --c-whitehouse: #f08a80; --c-courts: #7cc9a2;
+  --c-iran: #f0b35c; --c-economy: #5cc6dd; --c-disaster: #a5afc0; --c-world: #f28dbb; --seat-uncalled: #4a5568;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+}
+.wrap {
+  max-width: calc(1312px + 2 * var(--gutter));
+  margin: 0 auto;
+  padding-left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  padding-right: max(var(--gutter), env(safe-area-inset-right, 0px));
+}
+a { color: var(--accent); text-underline-offset: 2px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+
+/* Masthead */
+header.mast { padding-block: 64px 32px; display: grid; gap: 32px; }
+.eyebrow {
+  font-family: var(--f-mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2);
+  display: flex; flex-wrap: wrap; gap: 0.25rem 1rem;
+}
+h1 {
+  font-family: var(--f-display); font-weight: 400;
+  font-size: clamp(2.75rem, 6.5vw, 4.5rem);
+  line-height: 1.1; letter-spacing: -0.01em; text-transform: uppercase;
+  margin: 0; text-wrap: balance;
+}
+h1 .count { color: var(--accent); }
+.lede { max-width: 70rem; margin: 0; font-size: 1.15rem; }
+
+/* Balance of power */
+.power { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 32px; margin-block: 24px 64px; }
+
+/* Tabs */
+.tabs { display: flex; gap: 16px; border-bottom: 1px solid var(--rule); }
+.tab {
+  font-family: var(--f-body); font-size: 1rem; line-height: 1.5; color: var(--ink); text-decoration: none;
+  min-width: 179px; padding-bottom: 8px; border-bottom: 2px solid transparent; margin-bottom: -1px;
+}
+.tab[aria-selected="true"] { font-weight: 700; border-bottom-color: var(--ink); }
+.tab:hover { color: var(--accent); }
+.card { background: var(--sheet); border-radius: 16px; box-shadow: var(--shadow); min-width: 0; }
+.chamber { padding: 18px 20px 20px; display: grid; gap: 10px; }
+.chamber h2 { font-family: var(--f-body); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; margin: 0; color: var(--ink-2); font-weight: 700; }
+.chamber .big { font-family: var(--f-display); font-size: 2rem; line-height: 1; }
+.chamber p { margin: 0; font-size: 0.95rem; color: var(--ink-2); }
+.seatbar { display: flex; gap: 2px; height: 10px; max-width: 500px; }
+.seatbar span { flex: 1; }
+.seatbar .d { background: var(--c-elections); }
+.seatbar .r { background: var(--c-whitehouse); }
+.seatbar .u { background: var(--seat-uncalled); }
+
+/* Filters */
+.filters { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--paper); padding-block: 12px 40px; margin-top: 36px; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
+.chips { display: flex; flex-wrap: wrap; gap: 12px; }
+.chip {
+  font-family: var(--f-body); font-weight: 600; font-size: 1rem; line-height: 1.4;
+  border: 1px solid var(--rule); background: var(--sheet); color: var(--ink);
+  padding: 8px 12px; border-radius: 999px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+}
+.chip .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--c); }
+.chip .n { font-family: var(--f-mono); font-size: 0.75rem; color: var(--ink-2); font-weight: 400; }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); box-shadow: var(--shadow); }
+.chip[aria-pressed="true"] .n { color: var(--paper); opacity: 0.75; }
+
+/* Shared two-column section grid */
+.row { display: grid; grid-template-columns: var(--label-col) minmax(0, 1fr); gap: 0 32px; border-top: 1px solid var(--rule); padding-block: 40px 72px; }
+.row[hidden] { display: none !important; }
+#days .day:not([hidden]) ~ .day { border-top: 1px solid var(--rule); }
+#days .day { border-top: 0; padding-top: 16px; }
+#days .day:not([hidden]) ~ .day:not([hidden]) { padding-top: 40px; }
+.label { align-self: start; display: grid; gap: 9px; }
+.sticky-label { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 6.5rem); }
+.label .dn, .label h2 { font-family: var(--f-display); font-weight: 400; font-size: 2.6rem; line-height: 0.95; margin: 0; }
+.label .dn { text-transform: uppercase; }
+.label .date { font-family: var(--f-mono); font-size: 0.8rem; color: var(--ink-2); letter-spacing: 0.04em; text-transform: uppercase; }
+.label .sub { font-size: 0.95rem; color: var(--ink-2); }
+
+/* Event items */
+.items { display: grid; min-width: 0; }
+.entry { padding-block: 24px; border-top: 1px solid var(--rule); }
+.entry.first { border-top: 0; padding-top: 0; }
+.entry:last-child { padding-bottom: 0; }
+.entry[hidden] { display: none !important; }
+.item { display: grid; gap: 6px; min-width: 0; padding-left: 14px; border-left: 3px solid var(--c); }
+.cat { font-family: var(--f-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c); font-weight: 500; }
+.item h3 { font-family: var(--f-body); font-weight: 700; font-size: 1.25rem; line-height: 1.2; margin: 0; text-wrap: balance; }
+.item p { margin: 0; }
+.src { font-family: var(--f-mono); font-size: 0.76rem; color: var(--ink-2); display: flex; flex-wrap: wrap; gap: 0.25rem 0.75rem; }
+.src a { color: var(--ink-2); }
+.src a:hover { color: var(--accent); }
+
+/* The People's Voice */
+.voice { padding-top: 48px; display: grid; gap: 48px; }
+.voice h2 { font-family: var(--f-display); font-weight: 400; font-size: 2.5rem; line-height: 1; margin: 0; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 24px; }
+.stat { padding: 18px 20px 20px; display: grid; gap: 16px; align-content: start; }
+.actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 16px; margin-top: 24px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 12px;
+  font-family: var(--f-body); font-size: 0.875rem; line-height: 1.5; text-decoration: none;
+}
+.btn svg { width: 16px; height: 16px; flex: none; }
+.btn-ghost { color: var(--accent); }
+.btn-ghost:hover { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.btn-solid { background: var(--accent); color: var(--accent-ink); }
+.btn-solid:hover { filter: brightness(1.1); }
+.stat .big { font-family: var(--f-display); font-size: 2.6rem; line-height: 1; color: var(--accent); font-variant-numeric: tabular-nums; }
+.stat p { margin: 0; font-size: 0.95rem; }
+.stat .from { font-family: var(--f-mono); font-size: 0.72rem; color: var(--ink-2); letter-spacing: 0.04em; }
+.aside-note { margin: 0; font-size: 0.95rem; color: var(--ink-2); max-width: 46rem; }
+
+/* Coming up */
+.cal { max-width: 916px; min-width: 0; }
+.cal ul { margin: 0; padding: 0; }
+.cal li { list-style: none; display: grid; grid-template-columns: 144px 1fr; gap: 16px; padding-block: 13px; border-bottom: 1px solid var(--rule); }
+.cal li:first-child { padding-top: 0; }
+.cal time { font-family: var(--f-mono); font-size: 0.85rem; color: var(--ink-2); font-variant-numeric: tabular-nums; padding-top: 0.15rem; }
+.cal strong { font-weight: 700; }
+.cal span { display: block; color: var(--ink-2); font-size: 1rem; }
+
+footer { border-top: 1px solid var(--rule); padding-block: 24px 48px; margin-top: 56px; font-size: 0.9rem; color: var(--ink-2); }
+footer p { margin: 0 0 0.5rem; }
+.empty { color: var(--ink-2); font-style: italic; padding-block: 2rem; }
+
+@media (max-width: 760px) {
+  header.mast { padding-block: 32px 16px; gap: 20px; }
+  .filters { padding-bottom: 16px; margin-top: 20px; }
+  .tab { min-width: 0; flex: 1; }
+  .voice { padding-top: 32px; gap: 32px; }
+  .actions { justify-content: flex-start; }
+  .chips { gap: 8px; }
+  .chip { padding: 8px 11px; font-size: 0.9rem; }
+  .row { grid-template-columns: 1fr; gap: 16px; padding-block: 24px 40px; }
+  .sticky-label { position: static; }
+  .label.day-label { display: flex; align-items: baseline; gap: 0.75rem; }
+  .label .dn, .label h2 { font-size: 2rem; }
+  .cal li { grid-template-columns: 1fr; gap: 0.2rem; }
+}
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <div class="eyebrow"><span>U.S. midterms · Nov 3, 2026</span><span>Updated Sun, Nov 15</span></div>
+    <h1>Since the Midterms: <span class="count" id="daycount">Day 11</span></h1>
+    <p class="lede">Democrats won both chambers of Congress on November 3. Here is what has happened since then, at home and around the world: late race calls, a new fight in Washington, the Iran war, and the news that hasn't stopped. Newest first, with sources on every item.</p>
+  </header>
+
+  <div class="power" aria-label="Balance of power in the next Congress">
+    <div class="card chamber">
+      <h2>Senate, next Congress</h2>
+      <div class="big">55 D · 44 R</div>
+      <div class="seatbar" id="senatebar" aria-hidden="true"></div>
+      <p>Alaska is still uncalled. Mary Peltola (D) leads Sen. Dan Sullivan (R) and has declared victory. A win would make it 56.</p>
+    </div>
+    <div class="card chamber">
+      <h2>House, next Congress</h2>
+      <div class="big">Democratic majority</div>
+      <div class="seatbar" aria-hidden="true"><span class="d" style="flex:58"></span><span class="u" style="flex:3"></span><span class="r" style="flex:39"></span></div>
+      <p>About 10 races are still uncalled. NBC News says it will be Democrats' largest House majority in nearly two decades.</p>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="tabs" role="tablist" aria-label="Sections">
+    <a class="tab" role="tab" id="tab-timeline" href="#timeline" aria-controls="timeline-panel" aria-selected="true">The Timeline</a>
+    <a class="tab" role="tab" id="tab-voice" href="#peoples-voice" aria-controls="voice-panel" aria-selected="false">The People’s Voice</a>
+  </div>
+</div>
+
+<div id="timeline-panel" role="tabpanel" aria-labelledby="tab-timeline">
+  <nav class="filters" aria-label="Filter by topic">
+    <div class="wrap"><div class="chips" id="chips"></div></div>
+  </nav>
+  <main class="wrap">
+    <div id="days"></div>
+    <section class="row" aria-labelledby="ahead-h">
+      <div class="label sticky-label"><h2 id="ahead-h">Coming Up</h2></div>
+      <div class="cal"><ul id="cal"></ul></div>
+    </section>
+  </main>
+</div>
+
+<div id="voice-panel" role="tabpanel" aria-labelledby="tab-voice" hidden>
+  <section class="wrap voice" aria-labelledby="voice-h">
+    <h2 id="voice-h">The People’s Voice</h2>
+    <div class="stats" id="stats"></div>
+    <div class="items" id="people-items"></div>
+  </section>
+</div>
+
+<div class="wrap">
+  <footer>
+    <p id="voice-note" hidden>Petitions are self-selected, so they show how many people signed, not what most voters think. Speaker of the House is a House job: Chuck Schumer and Cory Booker are senators, and the fight over them is the Senate Democratic leader race. Petition links go to Change.org; this site isn't affiliated with any of them.</p>
+    <p>Each item was checked against at least two news reports, and the links point to them. Facts still in dispute are described as reported, not settled. Seat counts follow NBC News and AP race calls as of November 14 and will change as the last races are called.</p>
+    <p>Not included: reports that haven't been confirmed, such as U.S. men's soccer coach Mauricio Pochettino's reported move to Manchester United.</p>
+  </footer>
+</div>
+
+<script>
+const CATS = {
+  elections:  { label: "Elections",           c: "--c-elections" },
+  congress:   { label: "Congress",            c: "--c-congress" },
+  whitehouse: { label: "White House",         c: "--c-whitehouse" },
+  courts:     { label: "Courts",              c: "--c-courts" },
+  iran:       { label: "Iran war",            c: "--c-iran" },
+  economy:    { label: "Economy & business",  c: "--c-economy" },
+  disaster:   { label: "Disasters & travel",  c: "--c-disaster" },
+  world:      { label: "World",               c: "--c-world" },
+  people:     { label: "The people",          c: "--accent" },
+};
+
+const ELECTION = "2026-11-03";
+
+const EVENTS = [
+  // Nov 15
+  { d: "2026-11-15", cat: "iran", h: "Iran claims a second strike on a U.S. radar in Bahrain; the U.S. says it was stopped",
+    p: "The Revolutionary Guard said six drones hit a U.S. air-defense radar, its second such claim in three days. U.S. Central Command said two drones were launched toward Bahrain and both were shot down, with no injuries or damage. It's the first time since early September that Iran has claimed an attack on U.S. forces in the Gulf.",
+    s: [["Al Jazeera","https://www.aljazeera.com/news/2026/11/15/iran-says-it-targets-us-radar-in-bahrain-what-do-we-know"],["RFE/RL","https://www.rferl.org/a/iran-us-sirik-bahrain-war-nuclear-talks/33897951.html"],["ABC News","https://abcnews.com/International/wireStory/irans-revolutionary-guard-destroyed-us-radar-bahrain-mideast-138102943"]] },
+
+  // Nov 14
+  { d: "2026-11-14", cat: "elections", h: "Democrat Jonathan Kreiss-Tomkins wins Alaska's governorship",
+    p: "The AP called the race after more than a week of counting mail and remote ballots. He topped 50% on the first count, so ranked-choice tabulation wasn't needed. He replaces term-limited Republican Mike Dunleavy and becomes the state's first Democratic governor since 2002. At 37, he'll be the youngest governor in Alaska history.",
+    s: [["NPR","https://www.npr.org/2026/11/14/g-s1-151719/midterms-alaska-governor-kreiss-tomkins"],["Washington Post","https://www.washingtonpost.com/politics/2026/11/14/democrat-jonathan-kreiss-tomkins-wins-alaska-governors-race/"],["NBC News","https://www.nbcnews.com/politics/2026-election/jonathan-kreiss-tomkins-democrat-wins-alaska-governor-race-rcna606558"]] },
+  { d: "2026-11-14", cat: "elections", h: "Peltola declares victory in Alaska's Senate race; AP hasn't called it",
+    p: "Mary Peltola's lead over Sen. Dan Sullivan grew to nearly 4 points as more ballots were counted, but she is still short of 50%. If no one gets there, ranked-choice tabulation could start Nov. 18.",
+    s: [["Anchorage Daily News","https://www.adn.com/politics/2026/11/13/peltola-grows-lead-in-alaskas-us-senate-race-after-thousands-more-ballots-are-counted/"],["The Hill","https://thehill.com/homenews/campaign/6220605-peltola-leads-alaska-senate/"],["Washington Times","https://www.washingtontimes.com/news/2026/nov/14/peltola-declares-victory-alaska-senate-race/"]] },
+  { d: "2026-11-14", cat: "iran", h: "Trump may hold off on Iran barring new provocations, Reuters reports",
+    p: "Trump told advisers he may not resume attacks unless Iran or Yemen's Houthis provoke the U.S. Officials say he hasn't decided how to end the conflict. Saudi Arabia and Turkey have urged restraint, while Israel lobbies for another campaign.",
+    s: [["Reuters via Business Recorder","https://www.brecorder.com/news/40448913/trump-tells-advisers-he-may-hold-off-on-iran-attacks-barring-new-provocations-sources-say"],["Business Today","https://businesstoday.in/world/story/trump-considers-delaying-fresh-iran-strikes-as-saudi-arabia-turkey-urge-restraint-report-567480-2026-11-14"]] },
+
+  // Nov 13
+  { d: "2026-11-13", cat: "disaster", h: "FAA halts every departing flight in the country for four hours",
+    p: "A rare nationwide ground stop stranded travelers coast to coast on Friday. The FAA blamed an equipment failure during a telecom network upgrade and said there was \"zero evidence of anything nefarious,\" though the root cause hasn't been confirmed. Delays were expected to ripple through the weekend.",
+    s: [["NPR","https://www.npr.org/2026/11/14/nx-s1-6040952/faa-ground-stop-airplane-travel"],["Axios","https://www.axios.com/2026/11/13/faa-nationwide-ground-stop"],["CNBC","https://www.cnbc.com/2026/11/14/root-cause-of-nationwide-ground-stop-is-unknown-faa-says.html"]] },
+  { d: "2026-11-13", cat: "congress", h: "Administration asks Congress for $30 billion to modernize air traffic control",
+    p: "Transportation Secretary Sean Duffy and budget director Russell Vought urged lawmakers to approve $30.1 billion during the lame-duck session. Duffy warned that more disruptions are likely without it.",
+    s: [["Bloomberg Government","https://news.bgov.com/bloomberg-government-news/congress-faces-30-billion-ask-in-lame-duck-to-boost-air-safety"],["Axios","https://www.axios.com/2026/11/13/faa-nationwide-ground-stop"]] },
+
+  { d: "2026-11-13", cat: "disaster", h: "Tanker slams into a docked riverboat in New Orleans; everyone is rescued",
+    p: "The tanker Atlantic Asphalt lost steering on the Mississippi and struck the American Heritage, a paddlewheel cruise boat docked at the Port of New Orleans, which then capsized. About 190 passengers and crew were aboard. All were accounted for, and more than 30 people were hurt, including two police officers. The mayor called it a \"miracle on the Mississippi.\" Federal investigators say early data points to a steering failure, and the port has sued the tanker's owners for at least $1 million.",
+    s: [["CNN","https://www.cnn.com/2026/11/13/us/new-orleans-tanker-crash"],["WWNO","https://www.wwno.org/local-regional-news/2026-11-13/tanker-strikes-paddlewheel-cruise-ship-in-new-orleans-32-injured-no-passengers-missing"],["NBC News","https://www.nbcnews.com/news/us-news/rescue-underway-oil-tanker-collides-new-orleans-river-boat-rcna609235"],["NPR (lawsuit)","https://www.npr.org/2026/11/15/nx-s1-6041677/new-orleans-port-sues-miracle-mississippi-cruise-ship"]] },
+  { d: "2026-11-13", cat: "world", h: "Chile's truckers end a fuel-price strike after President Kast backs down",
+    p: "Truckers blockaded highways across Chile over a sixth straight fuel price increase, and bus, taxi and school transport drivers joined them. The government agreed to send Congress a bill reversing the latest increase. Polls show Kast's approval falling sharply.",
+    s: [["NPR","https://www.npr.org/2026/11/14/nx-s1-6040144/chile-protests-fuel-kast-students"],["UPI","https://www.upi.com/Top_News/World-News/2026/11/12/latam-chile-truckers-strike-fuel-prices/6231794504929"]] },
+
+  // Nov 12
+  { d: "2026-11-12", cat: "economy", h: "Jensen Huang resigns as Nvidia's CEO",
+    p: "Huang stepped down and left the board after reports of extramarital affairs, including one with an alleged Chinese spy, which has drawn FBI and congressional scrutiny. CFO Colette Kress is interim CEO. Nvidia shares fell, and the company reports earnings Nov. 17.",
+    s: [["NBC News","https://www.nbcnews.com/tech/tech-news/nvidia-ceo-jensen-huang-resigns-reports-extramarital-relationships-rcna608402"],["CNBC","https://www.cnbc.com/2026/11/12/nvidia-jensen-huang-ceo-live-updates.html"],["Nvidia 8-K filing","https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000082/nvidiaannouncesceotransiti.htm"]] },
+  { d: "2026-11-12", cat: "congress", h: "Van Hollen says he'll challenge Schumer for Senate Democratic leader",
+    p: "Sen. Chris Van Hollen of Maryland announced a run against Chuck Schumer, setting up the first contested Senate Democratic leader race in decades. The secret-ballot vote is Dec. 1. In the House, Democrats hold leadership elections Nov. 18–19, where Hakeem Jeffries has no declared rival.",
+    s: [["CNN","https://www.cnn.com/2026/11/12/politics/chris-van-hollen-chuck-schumer-senate-democratic-leader"],["ABC News","https://abcnews.com/Politics/schumer-van-hollen-facing-off-senate-majority-leader/story?id=138111386"],["Al Jazeera","https://www.aljazeera.com/news-analysis/2026/11/14/why-us-democrats-are-expected-to-keep-schumer-and-jeffries-in-power"]] },
+
+  // Nov 11
+  { d: "2026-11-11", cat: "elections", h: "Scott Colom flips Mississippi's Senate seat",
+    p: "The AP called the race for Colom over Sen. Cindy Hyde-Smith after provisional ballots came in. He led by just 43 votes after election night. Colom is the first Democrat elected to the Senate from Mississippi since 1982, and his win gives Democrats 55 seats. Hyde-Smith conceded.",
+    s: [["Mississippi Today","https://mississippitoday.org/2026/11/11/why-ap-called-mississippi-senate-race-scott-colom/"],["NPR","https://www.npr.org/2026/11/11/g-s1-151688/mississippi-senate-race-scott-colom"],["TIME","https://time.com/article/2026/11/12/mississippi-senate-race-scott-colom-cindy-hyde-smith-2026-midterm-elections/"]] },
+  { d: "2026-11-11", cat: "disaster", h: "Building collapse in Brooklyn kills eight",
+    p: "A three-story building at Flatbush and Bedford avenues fell into the construction site next door. Two children and two construction workers are among the dead, and at least 17 people were hurt, including four firefighters. The city is investigating the cause.",
+    s: [["Washington Post","https://www.washingtonpost.com/nation/2026/11/12/brooklyn-building-collapse-kills-two-injures-17-new-york-city-officials-say/"],["ABC News","https://abcnews.com/US/victims-deadly-brooklyn-building-collapse/story?id=138098954"],["CNN","https://www.cnn.com/2026/11/11/us/live-news/brooklyn-building-collapse-nyc"]] },
+
+  { d: "2026-11-11", cat: "disaster", h: "Part of a building collapses in downtown Aurora, Illinois",
+    p: "A section of a building on East Galena Boulevard fell into the street around 6:30 p.m., injuring three people, none seriously. The upper-floor apartments and the collapsed section were empty. The building had earlier structural damage and scaffolding for repairs, and the city is still investigating the cause.",
+    s: [["CBS Chicago","https://www.cbsnews.com/chicago/news/police-firefighters-respond-partial-building-collapse-aurora/"],["ABC7 Chicago","https://abc7chicago.com/post/aurora-illinois-news-3-injured-partial-building-collapse-north-broadway-east-galena-boulevard/20035456/"],["CNN (video)","https://www.cnn.com/2026/11/13/us/video/illinois-building-collapses-digvid-vrtc"]] },
+  { d: "2026-11-11", cat: "world", h: "Spain holds its first general strike in 14 years, over housing costs",
+    p: "Unions shut down factories, ports and commuter rail in a 24-hour strike over rents and wages. It comes weeks before a snap national election on Nov. 29, which Prime Minister Pedro Sánchez called after his housing package failed in parliament.",
+    s: [["Al Jazeera","https://www.aljazeera.com/amp/news/2026/11/11/spains-first-general-strike-in-14-years-begins"],["NPR via WUNC","https://www.wunc.org/2026-11-11/spains-first-general-strike-in-14-years-demands-solutions-to-housing-crisis"],["SCMP","https://www.scmp.com/news/world/europe/article/3374082/spanish-workers-stage-huge-general-strike-1st-14-years-angry-over-housing"]] },
+
+  // Nov 10
+  { d: "2026-11-10", cat: "world", h: "Ukraine, Russia and the U.S. hold their first peace talks since February",
+    p: "Delegations met in Abu Dhabi with White House envoys Steve Witkoff and Jared Kushner mediating. Both sides called the talks constructive and discussed a large prisoner exchange, but there was no sign of a breakthrough on ending the war.",
+    s: [["Washington Post","https://www.washingtonpost.com/world/2026/11/10/russia-ukraine-begin-us-backed-peace-talks-abu-dhabi/"],["PBS NewsHour","https://www.pbs.org/newshour/world/russia-and-ukraine-hold-nearly-4-hours-of-u-s-mediated-talks-in-abu-dhabi"],["CBS News","https://www.cbsnews.com/news/us-russia-ukraine-war-talks-peace-abu-dhabi-deal/"]] },
+  { d: "2026-11-10", cat: "congress", h: "House kills Hegseth impeachment by seven votes",
+    p: "The House voted 211–204 to send Rep. Thomas Massie's articles against Defense Secretary Pete Hegseth to committee, ending the effort for this Congress. Massie was the only Republican opposed. Eleven Democrats missed the vote, several blaming traffic. With them, it could have failed.",
+    s: [["CBS News","https://www.cbsnews.com/news/massie-hegseth-impeachment/"],["CNN","https://www.cnn.com/2026/11/11/politics/pete-hegseth-impeachment-votes-vis"],["ABC News","https://abcnews.com/Politics/democrats-missed-crucial-hegseth-impeachment-vote-blamed-traffic/story?id=138053963"]] },
+  { d: "2026-11-10", cat: "iran", h: "Trump pauses new Iran strikes after Gulf allies appeal",
+    p: "After White House talks with Qatar's prime minister, Trump said he'd hold off on fresh strikes. The U.S. naval blockade of the Strait of Hormuz stays in place, and attacks on tankers in the Gulf have continued.",
+    s: [["Detroit News","https://www.detroitnews.com/story/news/world/2026/11/10/trump-says-he-will-hold-off-on-fresh-iran-strikes-for-now/92704591007/"],["Al Jazeera","https://www.aljazeera.com/news/liveblog/2026/11/13/iran-war-live-riyadh-china-discuss-houthis-as-group-claims-aramco-attacks?update=5148172"]] },
+  { d: "2026-11-10", cat: "economy", h: "Hot inflation report pushes a December rate hike into view",
+    p: "Consumer prices rose 0.4% in October. Stocks fell, and the 10-year Treasury yield moved back above 5%. Markets now expect the Fed to raise rates a quarter point at its Dec. 8–9 meeting.",
+    s: [["TheStreet","https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-nov-10-2026"],["Yahoo Finance","https://finance.yahoo.com/markets/stocks/articles/stock-market-news-nov-11-095100012.html"]] },
+
+  // Nov 9
+  { d: "2026-11-09", cat: "congress", h: "Congress returns for a lame-duck session with a shutdown deadline",
+    p: "Government funding runs out Dec. 11, and there's no deal yet. Lawmakers also have the defense bill, a farm bill and air-safety money on the list before the new Congress arrives in January. On day one, Massie introduced articles of impeachment against Hegseth over the Iran war.",
+    s: [["Axios","https://www.axios.com/2026/11/09/congress-senioritis-lame-duck-shutdown-2026"],["Fox News","https://www.foxnews.com/politics/congress-returns-brutal-lame-duck-stretch-shutdown-deadline-leadership-races-closet-full-s"],["CNBC","https://www.cnbc.com/2026/11/10/pete-hegseth-impeachment-massie-iran.html"]] },
+  { d: "2026-11-09", cat: "whitehouse", h: "Trump questions the results he said he'd accept",
+    p: "Days after saying he was \"absolutely willing\" to accept the outcome, Trump asked on Truth Social whether anyone believes the election was honest, and revived claims about voting machines. He offered no evidence.",
+    s: [["CNBC","https://www.cnbc.com/2026/11/09/trump-election-results-democrats.html"],["NBC News","https://www.nbcnews.com/politics/donald-trump/trump-midterm-elections-voting-machines-doubt-rcna607893"]] },
+  { d: "2026-11-09", cat: "courts", h: "Supreme Court lets border wall work resume in Big Bend",
+    p: "In an 8–1 order, the justices lifted a lower court's block on wall construction in the Big Bend region of Texas while the case continues. Justice Ketanji Brown Jackson dissented. The administration says it won't build a large wall inside the national park itself.",
+    s: [["Texas Tribune","https://www.texastribune.org/2026/11/09/big-bend-border-wall-construction-supreme-court/"],["UPI","https://www.upi.com/Top_News/US/2026/11/09/supreme-court-allows-trump-wall-to-continue-big-bend/5291794266017"]] },
+
+  { d: "2026-11-09", cat: "world", h: "The UN climate summit opens in Turkey without a U.S. delegation",
+    p: "COP31 runs Nov. 9–20 in Antalya, on the 10th anniversary of the Paris Agreement taking effect. The United States, which formally left the agreement this year, isn't sending an official delegation. Climate finance is expected to be the main fight.",
+    s: [["United Nations","https://www.un.org/en/climatechange/cop31"],["Council on Foreign Relations","https://www.cfr.org/articles/cop31-in-turkey-what-to-expect-at-the-2026-un-climate-summit"]] },
+
+  // Nov 7
+  { d: "2026-11-07", cat: "world", h: "New Zealand's election is too close to call",
+    p: "Preliminary results give Prime Minister Christopher Luxon's coalition 68 of 131 seats, a majority of three, with more votes still to count. For the first time, neither of the two major parties won more than 30% of the vote.",
+    s: [["ABC News (Australia)","https://www.abc.net.au/news/2026-11-07/nz-election-2026-live-blog/107355448"],["The Sunday Guardian","https://sundayguardianlive.com/world/new-zealand-election-results-2026-pm-christopher-luxons-coalition-hangs-on-to-slim-3-seat-majority-as-voters-turn-against-major-parties-check-election-date-key-candidates-more-319606/"]] },
+
+  // Nov 6
+  { d: "2026-11-06", cat: "whitehouse", h: "Stephen Miller replaces Susie Wiles as White House chief of staff",
+    p: "Trump named Miller, his deputy chief of staff and homeland security adviser, to run the White House after Republicans' midterm losses. Wiles resigned and is moving to Trump's political operation. Miller took over Nov. 9.",
+    s: [["CNN","https://www.cnn.com/2026/11/06/politics/stephen-miller-trump-susie-wiles"],["NPR","https://www.npr.org/2026/11/06/nx-s1-6032795/stephen-miller-replace-susie-wiles-trumps-chief-of-staff"],["CBS News","https://www.cbsnews.com/news/stephen-miller-trump-chief-of-staff-susie-wiles/"],["Axios","https://www.axios.com/2026/11/06/susie-wiles-trump-stephen-miller-chief-of-staff"]] },
+
+  // Nov 5
+  { d: "2026-11-05", cat: "whitehouse", h: "First departure: DOJ civil rights chief Harmeet Dhillon resigns",
+    p: "Dhillon, who remade the Justice Department's Civil Rights Division, is the first senior official to leave after the midterms. She said she decided weeks ago and was asked to stay through Election Day.",
+    s: [["Federal News Network (AP)","https://federalnewsnetwork.com/people/2026/11/harmeet-dhillon-exits-after-radical-overhaul-of-justice-departments-civil-rights-division/"],["ABC7 News","https://abc7news.com/post/assistant-attorney-general-harmeet-dhillon-exits-radical-overhaul-justice-departments-civil-rights-division/20018222/"]] },
+
+  // Nov 4
+  { d: "2026-11-04", cat: "elections", h: "Democrats win control of the House and the Senate",
+    p: "Democrats will hold both chambers when the new Congress convenes in January, for the first time in four years. Flipped Senate seats include North Carolina, Texas, Ohio, Iowa, Kansas and South Carolina.",
+    s: [["NBC News","https://www.nbcnews.com/politics/2026-election/live-blog/midterm-election-results-2026-news-trump-live-updates-rcna605763"],["Al Jazeera","https://www.aljazeera.com/news/2026/11/4/democrats-win-control-of-house-and-senate-key-us-midterms-takeaways"],["Variety","https://variety.com/2026/politics/news/midterm-election-results-democrats-win-house-senate-1236938473/"],["U.S. News","https://www.usnews.com/news/national-news/articles/2026-midterm-results-which-races-are-still-undecided"]] },
+  { d: "2026-11-04", cat: "whitehouse", h: "Vance blames the Iran war for the losses",
+    p: "\"The reason we lost is the war,\" the vice president wrote in a long post on X, also citing the cost of living. Trump said it was \"largely true\" because the war pushed up gas prices, and added that Republicans would have won if he'd been on the ballot.",
+    s: [["Axios","https://www.axios.com/2026/11/04/jd-vance-iran-war-trump-election"],["Foreign Policy","https://foreignpolicy.com/?p=1245341"],["Axios (Trump)","https://www.axios.com/2026/11/04/trump-republicans-midterms-2026-landslide-blue-wave"]] },
+
+  // Nov 3
+  { d: "2026-11-03", cat: "elections", h: "Election night: Texas, North Carolina and Georgia go blue",
+    p: "James Talarico beat Ken Paxton, the first Democratic Senate win in Texas since 1988. Former Gov. Roy Cooper flipped North Carolina's open seat. In Georgia, Jon Ossoff won a second term and Keisha Lance Bottoms became the first Black woman elected governor of any state.",
+    s: [["NPR (Texas)","https://www.npr.org/2026/11/03/g-s1-148943/texas-senate-race-james-talarico"],["Houston Public Media","https://www.houstonpublicmedia.org/articles/news/politics/election-2026/2026/11/03/565938/talarico-paxton-senate-race-texas-results/"],["WRAL (N.C.)","https://www.wral.com/news/nccapitol/us-senate-race-nc-north-carolina-roy-cooper-michael-whatley-midterm-results-november-2026/"],["Axios (N.C.)","https://www.axios.com/2026/11/04/nc-senate-results-cooper-whatley"]] },
+  { d: "2026-11-03", cat: "elections", h: "Three Black women will serve in the Senate at once, a first",
+    p: "Juliana Stratton's win in Illinois means the Senate will have three Black women serving together for the first time in U.S. history.",
+    s: [["CNBC","https://www.cnbc.com/2026/11/04/2026-midterm-election-results-live-updates.html"]] },
+  { d: "2026-11-03", cat: "whitehouse", h: "On Election Day, Trump says U.S. military aid to Israel will end",
+    p: "Trump said the roughly $4 billion a year would stop around the end of 2026. Analysts note Congress appropriates the money and the current agreement runs to 2028, so how it would end is unclear.",
+    s: [["ABC News","https://abcnews.com/Politics/trump-israel-aid-end-year-citing-political-reasons/story?id=137809564"],["Al Jazeera","https://www.aljazeera.com/news/2026/11/3/trump-announces-that-us-will-stop-paying-israel-after-year-end"],["Times of Israel","https://www.timesofisrael.com/trump-says-us-to-end-4-billion-in-annual-military-aid-to-israel-by-end-of-2026/"]] },
+];
+
+const STATS = [
+  ["1M+", "signed a petition asking House Democrats to pick a Speaker other than Hakeem Jeffries", "Change.org, as reported Nov 13–14"],
+  ["90K+", "signed a petition to draft Rep. Ayanna Pressley for Speaker", "The Hill, Common Dreams"],
+  ["39%", "of voters named the economy the most important issue, ahead of democracy at 32%", "NBC News exit poll"],
+  ["88%", "of voters were concerned about grocery costs. 87% were concerned about gas prices.", "NBC News exit poll"],
+];
+
+const HOUSE = "https://www.house.gov/representatives/find-your-representative";
+const ICON = {
+  ghost: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>',
+  solid: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/><path d="M12 20h8"/></svg>',
+};
+
+const PEOPLE = [
+  { cat: "people", h: "More than a million people ask House Democrats for a different Speaker",
+    p: "A Change.org petition titled \"House Democrats: Choose a New Speaker\" asks members to vote for someone other than Hakeem Jeffries in January. It passed 1 million signatures within about a week, helped by actor Mark Ruffalo, and reports put it near 1.2 million by Nov. 13. Its creator discloses that she is paid in connection with the petition. No House Democrat has challenged Jeffries, and Rep. Jim Himes says Jeffries \"absolutely will be speaker.\" The caucus votes Nov. 18–19.",
+    a: [["ghost","Contact Your Rep",HOUSE],["solid","Sign the Petition","https://www.change.org/p/house-democrats-choose-a-new-speaker"]],
+    s: [["Common Dreams","https://www.commondreams.org/news/petition-opposing-hakeem-jeffries-for-speaker"],["Newsweek","https://www.newsweek.com/petition-to-replace-jeffries-hits-500k-as-ruffalo-wades-in-12668658"],["Atlanta Black Star","https://atlantablackstar.com/?p=801534"],["Daily Signal","https://www.dailysignal.com/2026/11/13/left-wants-different-speaker-jeffries/"]] },
+  { cat: "people", h: "Progressives push Ayanna Pressley as the alternative",
+    p: "A second petition, to draft the Massachusetts congresswoman for Speaker, has passed 90,000 signatures. Pressley hasn't said she will run.",
+    a: [["ghost","Contact Your Rep",HOUSE],["solid","Sign the Petition","https://www.change.org/p/make-ayanna-pressley-the-speaker-of-the-house"]],
+    s: [["The Hill","https://thehill.com/homenews/house/6217461-petition-pressley-speaker-house/"],["Common Dreams","https://www.commondreams.org/news/ayanna-pressley-for-speaker"],["TheGrio","https://thegrio.com/2026/11/12/progressives-want-ayanna-pressley-not-hakeem-jeffries-as-next-house-speaker/"]] },
+  { cat: "people", h: "Pressure on Schumer turns into a real race",
+    p: "Petitions to remove Chuck Schumer as the Senate's Democratic leader have circulated since Election Day, and the Democratic Socialists of America back Chris Van Hollen's challenge. Cory Booker, re-elected Nov. 3, is often named as another alternative but hasn't entered. Senators decide by secret ballot on Dec. 1, and prediction markets still favor Schumer.",
+    a: [["ghost","Contact Your Senators","https://www.senate.gov/senators/senators-contact.htm"],["solid","Sign the Petition","https://www.change.org/p/replace-chuck-schumer-as-senate-majority-leader"]],
+    s: [["Newsweek (petitions)","https://www.newsweek.com/petitions-to-replace-chuck-schumer-pass-100000-signatures-day-after-launch-12674387"],["Ahram Online","https://english.ahram.org.eg/News/581906.aspx"],["Newsweek (DSA)","https://www.newsweek.com/chuck-schumer-senate-democratic-leader-challenge-dsa-12714492"],["Newsweek (alternatives)","https://www.newsweek.com/chuck-schumer-favorites-replace-democratic-senate-leader-12656990"],["CNN","https://www.cnn.com/2026/11/12/politics/chris-van-hollen-chuck-schumer-senate-democratic-leader"]] },
+  { cat: "people", h: "Voters said prices drove their vote",
+    p: "In NBC's exit poll, the economy topped the list of issues, and large majorities worried about the cost of groceries, gas, utilities and health care. Before the election, Gallup found the Iran war was extremely important to 58% of Democrats and 35% of Republicans.",
+    s: [["NBC News exit poll","https://www.nbcnews.com/politics/2026-election/exit-poll-trump-midterms-voters-economy-disapproval-rcna607045"],["Gallup","https://news.gallup.com/poll/716333/issues-voters-say-matter-midterm.aspx"],["Inside Political Law","https://www.insidepoliticallaw.com/2026/11/05/what-the-2026-exit-polls-signal-for-democratic-investigations-in-congress/"]] },
+];
+
+const AHEAD = [
+  ["Tue, Nov 17", "Nvidia reports earnings", "Its first report since Huang's resignation."],
+  ["Wed, Nov 18", "Alaska ranked-choice count could begin", "Only if no Senate candidate reaches 50%."],
+  ["Nov 18–19", "House Democrats elect their leaders", "Hakeem Jeffries is expected to be nominated for speaker, despite the petition against him."],
+  ["Nov 18–19", "Trump and Xi meet at the APEC summit", "In Shenzhen, China. Trade is expected to dominate."],
+  ["Fri, Nov 20", "UN climate summit ends", "COP31 in Antalya, Turkey."],
+  ["Sun, Nov 29", "Spain votes in a snap election", "Called after the housing package failed in parliament."],
+  ["Tue, Dec 1", "Senate Democrats choose a leader", "Schumer vs. Van Hollen, by secret ballot."],
+  ["Dec 8–9", "Federal Reserve meeting", "Markets are pricing in a quarter-point rate hike."],
+  ["Fri, Dec 11", "Government funding runs out", "Congress needs a deal or another stopgap to avoid a shutdown."],
+  ["January 2027", "New Congress convenes", "Democrats take control of both chambers, and the House elects its Speaker."],
+];
+
+const dayN = d => Math.round((Date.parse(d) - Date.parse(ELECTION)) / 864e5);
+const fmt = d => new Date(d + "T12:00:00").toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+const esc = s => s.replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));
+
+const itemHTML = e => `
+  <div class="entry" data-cat="${e.cat}">
+    <article class="item" style="--c: var(${CATS[e.cat].c})">
+      <span class="cat">${CATS[e.cat].label}</span>
+      <h3>${esc(e.h)}</h3>
+      <p>${esc(e.p)}</p>
+      <div class="src">${e.s.map(([name, url]) => `<a href="${url}" target="_blank" rel="noopener">${esc(name)}</a>`).join("")}</div>
+    </article>
+    ${e.a ? `<div class="actions">${e.a.map(([kind, label, url]) =>
+      `<a class="btn btn-${kind}" href="${url}" target="_blank" rel="noopener">${esc(label)}${ICON[kind]}</a>`).join("")}</div>` : ""}
+  </div>`;
+
+// Senate seat bar: 55 D, 1 uncalled, 44 R
+document.getElementById("senatebar").innerHTML =
+  Array.from({ length: 100 }, (_, i) => `<span class="${i < 55 ? "d" : i < 56 ? "u" : "r"}"></span>`).join("");
+
+// Timeline
+const days = [...new Set(EVENTS.map(e => e.d))].sort().reverse();
+const tl = document.getElementById("days");
+tl.innerHTML = days.map(d => {
+  const n = dayN(d);
+  return `<section class="row day" data-day="${d}">
+    <div class="label day-label sticky-label"><span class="dn">${n === 0 ? "Election Day" : "Day " + n}</span><span class="date">${fmt(d)}</span></div>
+    <div class="items">${EVENTS.filter(e => e.d === d).map(itemHTML).join("")}</div>
+  </section>`;
+}).join("") + `<p class="empty" id="empty" hidden>Nothing in this topic yet.</p>`;
+
+// The people
+document.getElementById("stats").innerHTML = STATS.map(([big, p, from]) =>
+  `<div class="card stat"><span class="big">${big}</span><p>${esc(p)}</p><span class="from">${esc(from)}</span></div>`).join("");
+document.getElementById("people-items").innerHTML = PEOPLE.map(itemHTML).join("");
+
+// Mark the first visible entry in each list so it gets no divider
+function markFirst(container) {
+  let seen = false;
+  container.querySelectorAll(".entry").forEach(en => {
+    en.classList.toggle("first", !en.hidden && !seen);
+    if (!en.hidden) seen = true;
+  });
+}
+document.querySelectorAll(".items").forEach(markFirst);
+
+// Filters
+const chips = document.getElementById("chips");
+const counts = EVENTS.reduce((m, e) => (m[e.cat] = (m[e.cat] || 0) + 1, m), {});
+const order = ["all", ...Object.keys(CATS).filter(k => counts[k])];
+chips.innerHTML = order.map(k => k === "all"
+  ? `<button class="chip" id="chip-all" data-k="all" aria-pressed="true">All <span class="n">${EVENTS.length}</span></button>`
+  : `<button class="chip" id="chip-${k}" data-k="${k}" aria-pressed="false" style="--c: var(${CATS[k].c})"><span class="dot"></span>${CATS[k].label} <span class="n">${counts[k]}</span></button>`
+).join("");
+
+function apply(k) {
+  chips.querySelectorAll(".chip").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.k === k)));
+  let any = false;
+  tl.querySelectorAll(".day").forEach(day => {
+    let shown = 0;
+    day.querySelectorAll(".entry").forEach(en => {
+      const on = k === "all" || en.dataset.cat === k;
+      en.hidden = !on; if (on) shown++;
+    });
+    day.hidden = shown === 0; if (shown) any = true;
+    markFirst(day);
+  });
+  document.getElementById("empty").hidden = any;
+}
+chips.addEventListener("click", e => { const b = e.target.closest(".chip"); if (b) apply(b.dataset.k); });
+try { localStorage.removeItem("stm-filter"); } catch (e) {}
+
+// Upcoming
+document.getElementById("cal").innerHTML = AHEAD.map(([t, h, s]) =>
+  `<li><time>${t}</time><div><strong>${esc(h)}</strong><span>${esc(s)}</span></div></li>`).join("");
+
+document.getElementById("daycount").textContent = "Day " + dayN(days[0]);
+
+// Tabs: #timeline (default) and #peoples-voice
+const TABS = { "timeline": ["tab-timeline", "timeline-panel"], "peoples-voice": ["tab-voice", "voice-panel"] };
+function showTab() {
+  const want = location.hash.slice(1);
+  const key = TABS[want] ? want : "timeline";
+  for (const [k, [t, p]] of Object.entries(TABS)) {
+    const on = k === key;
+    document.getElementById(t).setAttribute("aria-selected", String(on));
+    document.getElementById(p).hidden = !on;
+  }
+  document.getElementById("voice-note").hidden = key !== "peoples-voice";
+}
+window.addEventListener("hashchange", showTab);
+showTab();
+</script>
+
+</body>
+</html>
