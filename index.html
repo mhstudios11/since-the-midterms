@@ -25,6 +25,7 @@
   --c-economy: #0e7490;
   --c-disaster: #5b6474;
   --c-world: #b5306b;
+  --c-health: #4d7c0f;
   --seat-uncalled: #9aa5b8;
 
   --f-display: "Anton", "Impact", "Arial Narrow", sans-serif;
@@ -39,7 +40,7 @@
     --paper: #0e131c; --sheet: #151c28; --ink: #e6eaf2; --ink-2: #9aa5b8; --rule: #2a3445; --accent: #7f9dff; --accent-ink: #0e131c;
     --shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.3), 0 16px 32px -4px rgba(0, 0, 0, 0.45);
     --c-elections: #7f9dff; --c-congress: #c39bf0; --c-whitehouse: #f08a80; --c-courts: #7cc9a2;
-    --c-iran: #f0b35c; --c-economy: #5cc6dd; --c-disaster: #a5afc0; --c-world: #f28dbb; --seat-uncalled: #4a5568;
+    --c-iran: #f0b35c; --c-economy: #5cc6dd; --c-disaster: #a5afc0; --c-world: #f28dbb; --c-health: #a3d86b; --seat-uncalled: #4a5568;
     color-scheme: dark;
   }
 }
@@ -47,7 +48,7 @@
   --paper: #0e131c; --sheet: #151c28; --ink: #e6eaf2; --ink-2: #9aa5b8; --rule: #2a3445; --accent: #7f9dff; --accent-ink: #0e131c;
   --shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.3), 0 16px 32px -4px rgba(0, 0, 0, 0.45);
   --c-elections: #7f9dff; --c-congress: #c39bf0; --c-whitehouse: #f08a80; --c-courts: #7cc9a2;
-  --c-iran: #f0b35c; --c-economy: #5cc6dd; --c-disaster: #a5afc0; --c-world: #f28dbb; --seat-uncalled: #4a5568;
+  --c-iran: #f0b35c; --c-economy: #5cc6dd; --c-disaster: #a5afc0; --c-world: #f28dbb; --c-health: #a3d86b; --seat-uncalled: #4a5568;
   color-scheme: dark;
 }
 
@@ -265,7 +266,7 @@ footer p { margin: 0 0 0.5rem; }
         <h3>Senate, next Congress</h3>
         <div class="big">55 D · 44 R</div>
         <div class="seatbar" id="senatebar" aria-hidden="true"></div>
-        <p>Alaska is still uncalled. Mary Peltola (D) leads Sen. Dan Sullivan (R) and has declared victory. A win would make it 56.</p>
+        <p>Alaska is still uncalled. Mary Peltola (D) has 49.98% of first-choice votes to Sen. Dan Sullivan's (R) 45.93%. A win would make it 56.</p>
       </div>
       <div class="card chamber">
         <h3>House, next Congress</h3>
@@ -304,7 +305,7 @@ footer p { margin: 0 0 0.5rem; }
 <div class="wrap">
   <footer>
     <p id="voice-note" hidden>Petitions are self-selected, so they show how many people signed, not what most voters think. Speaker of the House is a House job: Chuck Schumer and Cory Booker are senators, and the fight over them is the Senate Democratic leader race. Petition links go to Change.org; this site isn't affiliated with any of them.</p>
-    <p>Each item was checked against at least two news reports, and the links point to them. Facts still in dispute are described as reported, not settled. Seat counts follow NBC News and AP race calls as of November 14 and will change as the last races are called.</p>
+    <p>Each item was checked against at least two news reports, and the links point to them. Facts still in dispute are described as reported, not settled. Seat counts follow NBC News and AP race calls as of November 16 and will change as the last races are called.</p>
     <p>Not included: reports that haven't been confirmed, such as U.S. men's soccer coach Mauricio Pochettino's reported move to Manchester United.</p>
   </footer>
 </div>
@@ -319,12 +320,29 @@ const CATS = {
   economy:    { label: "Economy & business",  c: "--c-economy" },
   disaster:   { label: "Disasters & travel",  c: "--c-disaster" },
   world:      { label: "World",               c: "--c-world" },
+  health:     { label: "Health",              c: "--c-health" },
   people:     { label: "The people",          c: "--accent" },
 };
 
 const ELECTION = "2026-11-03";
 
 const EVENTS = [
+  // Nov 17
+  { d: "2026-11-17", cat: "iran", h: "U.S. strikes an Iranian missile site after a third drone attack on Bahrain",
+    p: "U.S. forces hit a Revolutionary Guard missile launch site on Qeshm Island in the Strait of Hormuz, calling it self-defense. It followed Iran's third attempted drone strike on a U.S. base in Bahrain in five days. All were intercepted, with no U.S. injuries reported. Iran says the U.S. strikes caused no civilian damage.",
+    s: [["Iran International","https://www.iranintl.com/en/202611172999"],["Xinhua (citing CBS News)","https://english.news.cn/20261118/4d068baf65e149b68edf59015482ca6b/c.html"],["Yahoo News","https://www.yahoo.com/news/world/articles/iran-live-updates-tanker-attacked-084617419.html"]] },
+  { d: "2026-11-17", cat: "whitehouse", h: "Trump lands in Manila at the start of an Asia trip that ends in China",
+    p: "Trump arrived for the ASEAN summit and a Quad leaders' meeting, joined by Secretary of State Marco Rubio and Treasury Secretary Scott Bessent. He heads next to China, where he is expected to meet Xi Jinping and Vladimir Putin together for the first time.",
+    s: [["GMA News","https://www.gmanetwork.com/news/topstories/nation/1009755/us-president-donald-trump-arrives-in-manila-for-asean-summit/story/"],["Rappler","https://www.rappler.com/philippines/trump-arrives-state-visit-asean-special-summit-2026/"],["NBC News","https://www.nbcnews.com/politics/trump-administration/live-blog/trump-xi-putin-summit-asia-trip-asean-live-updates-rcna609690"]] },
+
+  // Nov 16
+  { d: "2026-11-16", cat: "iran", h: "Report: Iran is developing plans for a possible \"dirty bomb\" attack in Washington",
+    p: "CNN reported that U.S. intelligence shows Iran drawing up plans to target senior officials with a radiological or chemical weapon in D.C., though officials disagree on whether it could or would carry one out. The White House says there are no credible threats to the homeland. Trump said the report is being taken \"very seriously,\" and Iran denies it.",
+    s: [["CNN","https://www.cnn.com/2026/11/16/politics/us-intelligence-iran-dirty-bomb"],["TIME","https://time.com/article/2026/11/17/iran-dirty-bomb-plot-radiological-chemical-weapon-washington-dc-intelligence/"],["Al Jazeera","https://www.aljazeera.com/news/2026/11/17/is-iran-plotting-a-dirty-bomb-attack-in-the-us-what-we-know"]] },
+  { d: "2026-11-16", cat: "elections", h: "Peltola sits just shy of an outright win in Alaska",
+    p: "With just over 285,000 ballots counted, Mary Peltola had 49.98% of first-choice votes to Sen. Dan Sullivan's 45.93%. If she stays under 50%, a ranked-choice count decides the race. It's the last uncalled Senate race in the country, and Alaska aims to certify results Nov. 25.",
+    s: [["Anchorage Daily News","https://www.adn.com/politics/2026/11/16/peltola-approaches-victory-in-alaskas-us-senate-race/"],["Newsweek","https://www.newsweek.com/mary-peltola-closes-in-on-50-threshold-in-alaska-senate-race-12718013"],["The Hill","https://thehill.com/homenews/campaign/6224075-peltola-leads-alaska-senate-race/"]] },
+
   // Nov 15
   { d: "2026-11-15", cat: "iran", h: "Iran claims a second strike on a U.S. radar in Bahrain; the U.S. says it was stopped",
     p: "The Revolutionary Guard said six drones hit a U.S. air-defense radar, its second such claim in three days. U.S. Central Command said two drones were launched toward Bahrain and both were shot down, with no injuries or damage. It's the first time since early September that Iran has claimed an attack on U.S. forces in the Gulf.",
@@ -355,6 +373,10 @@ const EVENTS = [
   { d: "2026-11-13", cat: "world", h: "Chile's truckers end a fuel-price strike after President Kast backs down",
     p: "Truckers blockaded highways across Chile over a sixth straight fuel price increase, and bus, taxi and school transport drivers joined them. The government agreed to send Congress a bill reversing the latest increase. Polls show Kast's approval falling sharply.",
     s: [["NPR","https://www.npr.org/2026/11/14/nx-s1-6040144/chile-protests-fuel-kast-students"],["UPI","https://www.upi.com/Top_News/World-News/2026/11/12/latam-chile-truckers-strike-fuel-prices/6231794504929"]] },
+
+  { d: "2026-11-13", cat: "health", h: "U.S. measles deaths reach 10 this year",
+    p: "New deaths in Wisconsin and Pennsylvania brought the count from state health departments to 10, as cases reach their highest level since 1991. The CDC's own count, which uses federal mortality data, was six.",
+    s: [["Al Jazeera","https://www.aljazeera.com/amp/news/2026/11/14/measles-associated-deaths-reach-10-in-us-after-two-more-deaths-reported"],["Contagion Live","https://www.contagionlive.com/view/measles-update-november-13-2026"],["Gulf News","https://gulfnews.com/world/americas/us-records-first-measles-deaths-of-2026-as-outbreak-worsens-1.500652055"]] },
 
   // Nov 12
   { d: "2026-11-12", cat: "economy", h: "Jensen Huang resigns as Nvidia's CEO",
@@ -518,8 +540,8 @@ const RACES_NOTABLE = [
     s: [["GPB","https://www.gpb.org/news/2026/11/03/jon-ossoff-wins-reelection-the-us-senate"],["WLRN (NPR)","https://www.wlrn.org/national-politics/2026-11-03/jon-ossoff-wins-reelection-in-georgia-easily-defeating-republican-mike-collins"]] },
   { office: "Illinois · Senate", name: "Juliana Stratton", text: "Keeps Dick Durbin's seat blue. With Angela Alsobrooks and Lisa Blunt Rochester, three Black women will serve in the Senate at once for the first time.",
     s: [["TheGrio","https://thegrio.com/2026/11/03/juliana-stratton-defeats-don-tracy-in-illinois-joining-historic-senate-vanguard/"],["CNBC","https://www.cnbc.com/2026/11/04/2026-midterm-election-results-live-updates.html"]] },
-  { office: "Alaska · Senate", name: "Mary Peltola, still counting", text: "Leads Sen. Dan Sullivan and has declared victory, but the AP hasn't called it. A win would give Democrats 56 seats.",
-    s: [["Anchorage Daily News","https://www.adn.com/politics/2026/11/13/peltola-grows-lead-in-alaskas-us-senate-race-after-thousands-more-ballots-are-counted/"],["The Hill","https://thehill.com/homenews/campaign/6220605-peltola-leads-alaska-senate/"]] },
+  { office: "Alaska · Senate", name: "Mary Peltola, still counting", text: "Had 49.98% of first-choice votes on Nov. 16, just shy of an outright win, and has declared victory. A win would give Democrats 56 seats.",
+    s: [["Anchorage Daily News","https://www.adn.com/politics/2026/11/16/peltola-approaches-victory-in-alaskas-us-senate-race/"],["The Hill","https://thehill.com/homenews/campaign/6224075-peltola-leads-alaska-senate-race/"]] },
   { office: "Georgia · Attorney general", name: "Tanya Miller", text: "The first woman elected Georgia's attorney general.",
     s: [["WSB-TV","https://www.wsbtv.com/news/local/atlanta/georgia-elections-2026-live-updates-polls-open-election-day/ZFRV7BK7YZEK7P4OSGYR7UHJXY/"],["Georgia Recorder","https://georgiarecorder.com/2026/11/04/democrats-flip-statewide-offices-up-and-down-the-ballot-in-georgia-state-house-is-in-play/"]] },
   { office: "Georgia · Secretary of state", name: "Penny Brown Reynolds", text: "The first Black woman elected Georgia's secretary of state.",
@@ -534,8 +556,9 @@ const AHEAD = [
   ["Tue, Nov 17", "Nvidia reports earnings", "Its first report since Huang's resignation."],
   ["Wed, Nov 18", "Alaska ranked-choice count could begin", "Only if no Senate candidate reaches 50%."],
   ["Nov 18–19", "House Democrats elect their leaders", "Hakeem Jeffries is expected to be nominated for speaker, despite the petition against him."],
-  ["Nov 18–19", "Trump and Xi meet at the APEC summit", "In Shenzhen, China. Trade is expected to dominate."],
+  ["Nov 18–19", "Trump, Xi and Putin meet in China", "Expected to be the three leaders' first joint meeting, at the APEC summit in Shenzhen."],
   ["Fri, Nov 20", "UN climate summit ends", "COP31 in Antalya, Turkey."],
+  ["Wed, Nov 25", "Alaska certifies its results", "The target date for a final answer in the last uncalled Senate race."],
   ["Sun, Nov 29", "Spain votes in a snap election", "Called after the housing package failed in parliament."],
   ["Tue, Dec 1", "Senate Democrats choose a leader", "Schumer vs. Van Hollen, by secret ballot."],
   ["Dec 8–9", "Federal Reserve meeting", "Markets are pricing in a quarter-point rate hike."],
