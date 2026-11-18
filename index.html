@@ -26,6 +26,7 @@
   --c-disaster: #5b6474;
   --c-world: #b5306b;
   --c-health: #4d7c0f;
+  --c-outages: #c2410c;
   --seat-uncalled: #9aa5b8;
 
   --f-display: "Anton", "Impact", "Arial Narrow", sans-serif;
@@ -40,7 +41,7 @@
     --paper: #0e131c; --sheet: #151c28; --ink: #e6eaf2; --ink-2: #9aa5b8; --rule: #2a3445; --accent: #7f9dff; --accent-ink: #0e131c;
     --shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.3), 0 16px 32px -4px rgba(0, 0, 0, 0.45);
     --c-elections: #7f9dff; --c-congress: #c39bf0; --c-whitehouse: #f08a80; --c-courts: #7cc9a2;
-    --c-iran: #f0b35c; --c-economy: #5cc6dd; --c-disaster: #a5afc0; --c-world: #f28dbb; --c-health: #a3d86b; --seat-uncalled: #4a5568;
+    --c-iran: #f0b35c; --c-economy: #5cc6dd; --c-disaster: #a5afc0; --c-world: #f28dbb; --c-health: #a3d86b; --c-outages: #fb923c; --seat-uncalled: #4a5568;
     color-scheme: dark;
   }
 }
@@ -48,7 +49,7 @@
   --paper: #0e131c; --sheet: #151c28; --ink: #e6eaf2; --ink-2: #9aa5b8; --rule: #2a3445; --accent: #7f9dff; --accent-ink: #0e131c;
   --shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.3), 0 16px 32px -4px rgba(0, 0, 0, 0.45);
   --c-elections: #7f9dff; --c-congress: #c39bf0; --c-whitehouse: #f08a80; --c-courts: #7cc9a2;
-  --c-iran: #f0b35c; --c-economy: #5cc6dd; --c-disaster: #a5afc0; --c-world: #f28dbb; --c-health: #a3d86b; --seat-uncalled: #4a5568;
+  --c-iran: #f0b35c; --c-economy: #5cc6dd; --c-disaster: #a5afc0; --c-world: #f28dbb; --c-health: #a3d86b; --c-outages: #fb923c; --seat-uncalled: #4a5568;
   color-scheme: dark;
 }
 
@@ -321,6 +322,7 @@ const CATS = {
   disaster:   { label: "Disasters & travel",  c: "--c-disaster" },
   world:      { label: "World",               c: "--c-world" },
   health:     { label: "Health",              c: "--c-health" },
+  outages:    { label: "Outages",             c: "--c-outages" },
   people:     { label: "The people",          c: "--accent" },
 };
 
@@ -335,7 +337,17 @@ const EVENTS = [
     p: "Trump arrived for the ASEAN summit and a Quad leaders' meeting, joined by Secretary of State Marco Rubio and Treasury Secretary Scott Bessent. He heads next to China, where he is expected to meet Xi Jinping and Vladimir Putin together for the first time.",
     s: [["GMA News","https://www.gmanetwork.com/news/topstories/nation/1009755/us-president-donald-trump-arrives-in-manila-for-asean-summit/story/"],["Rappler","https://www.rappler.com/philippines/trump-arrives-state-visit-asean-special-summit-2026/"],["NBC News","https://www.nbcnews.com/politics/trump-administration/live-blog/trump-xi-putin-summit-asia-trip-asean-live-updates-rcna609690"]] },
 
+  { d: "2026-11-17", cat: "outages", h: "Apple Pay, the App Store and iCloud go down",
+    p: "Apple said an internal update caused outages across several of its services Tuesday, not a cyberattack, and restored them later that day. It capped a week of separate tech failures. Officials and companies say none of them are connected.",
+    s: [["CBS News","https://www.cbsnews.com/news/apple-outage-icloud-apple-pay-services/"],["Spokesman-Review","https://www.spokesman.com/stories/2026/nov/17/is-apple-down-thousands-report-problems-accessing-/"],["U.S. News","https://www.usnews.com/news/national-news/articles/2026-11-17/apple-microsoft-chase-what-to-know-about-the-latest-tech-glitches"]] },
+
   // Nov 16
+  { d: "2026-11-16", cat: "outages", h: "A Chase software bug slows banking across the country",
+    p: "JPMorgan Chase said a bug in its own hardware systems delayed transactions. Customers at Bank of America, Wells Fargo and other banks also reported trouble logging in and sending money, including through Zelle. Chase said there was no sign of a cyberattack, and transactions were processing normally by Monday night.",
+    s: [["CNBC","https://www.cnbc.com/2026/11/16/jpmorgan-chase-technical-issue.html"],["ABC News","https://abcnews.com/Business/us-banks-reporting-technical-issues-online-transactions/story?id=138187551"],["Bloomberg","https://www.bloomberg.com/news/articles/2026-11-16/jpmorgan-is-working-to-fix-technical-issue-affecting-customers"],["Al Jazeera","https://www.aljazeera.com/news/2026/11/17/us-bank-outage-what-caused-chase-problems-and-zelle-payment-delays"]] },
+  { d: "2026-11-16", cat: "outages", h: "United Airlines holds departures during a 90-minute system outage",
+    p: "A systemwide technology problem held United departures for about an hour and a half, three days after the FAA ground stop. United said it wasn't related to the FAA's problems and showed no sign of a cyberattack.",
+    s: [["CBS News","https://www.cbsnews.com/news/united-airlines-system-outage-departing-flights/"],["NBC News","https://www.nbcnews.com/news/us-news/united-airlines-system-outage-rcna609712"],["Washington Post","https://www.washingtonpost.com/transportation/2026/11/16/united-airlines-hit-by-tech-issues-days-after-nationwide-ground-stop/"]] },
   { d: "2026-11-16", cat: "iran", h: "Report: Iran is developing plans for a possible \"dirty bomb\" attack in Washington",
     p: "CNN reported that U.S. intelligence shows Iran drawing up plans to target senior officials with a radiological or chemical weapon in D.C., though officials disagree on whether it could or would carry one out. The White House says there are no credible threats to the homeland. Trump said the report is being taken \"very seriously,\" and Iran denies it.",
     s: [["CNN","https://www.cnn.com/2026/11/16/politics/us-intelligence-iran-dirty-bomb"],["TIME","https://time.com/article/2026/11/17/iran-dirty-bomb-plot-radiological-chemical-weapon-washington-dc-intelligence/"],["Al Jazeera","https://www.aljazeera.com/news/2026/11/17/is-iran-plotting-a-dirty-bomb-attack-in-the-us-what-we-know"]] },
@@ -360,7 +372,7 @@ const EVENTS = [
     s: [["Reuters via Business Recorder","https://www.brecorder.com/news/40448913/trump-tells-advisers-he-may-hold-off-on-iran-attacks-barring-new-provocations-sources-say"],["Business Today","https://businesstoday.in/world/story/trump-considers-delaying-fresh-iran-strikes-as-saudi-arabia-turkey-urge-restraint-report-567480-2026-11-14"]] },
 
   // Nov 13
-  { d: "2026-11-13", cat: "disaster", h: "FAA halts every departing flight in the country for four hours",
+  { d: "2026-11-13", cat: "outages", h: "FAA halts every departing flight in the country for four hours",
     p: "A rare nationwide ground stop stranded travelers coast to coast on Friday. The FAA blamed an equipment failure during a telecom network upgrade and said there was \"zero evidence of anything nefarious,\" though the root cause hasn't been confirmed. Delays were expected to ripple through the weekend.",
     s: [["NPR","https://www.npr.org/2026/11/14/nx-s1-6040952/faa-ground-stop-airplane-travel"],["Axios","https://www.axios.com/2026/11/13/faa-nationwide-ground-stop"],["CNBC","https://www.cnbc.com/2026/11/14/root-cause-of-nationwide-ground-stop-is-unknown-faa-says.html"]] },
   { d: "2026-11-13", cat: "congress", h: "Administration asks Congress for $30 billion to modernize air traffic control",
@@ -385,6 +397,10 @@ const EVENTS = [
   { d: "2026-11-12", cat: "congress", h: "Van Hollen says he'll challenge Schumer for Senate Democratic leader",
     p: "Sen. Chris Van Hollen of Maryland announced a run against Chuck Schumer, setting up the first contested Senate Democratic leader race in decades. The secret-ballot vote is Dec. 1. In the House, Democrats hold leadership elections Nov. 18–19, where Hakeem Jeffries has no declared rival.",
     s: [["CNN","https://www.cnn.com/2026/11/12/politics/chris-van-hollen-chuck-schumer-senate-democratic-leader"],["ABC News","https://abcnews.com/Politics/schumer-van-hollen-facing-off-senate-majority-leader/story?id=138111386"],["Al Jazeera","https://www.aljazeera.com/news-analysis/2026/11/14/why-us-democrats-are-expected-to-keep-schumer-and-jeffries-in-power"]] },
+
+  { d: "2026-11-12", cat: "outages", h: "Microsoft Outlook and Teams go down worldwide",
+    p: "Users in more than 70 countries lost access to Outlook email, Teams and other Microsoft 365 services. Microsoft blamed a problem left by an earlier network upgrade, said it wasn't a hack, and had email approaching normal by Nov. 13.",
+    s: [["CNN","https://www.cnn.com/2026/11/12/business/live-news/microsoft-global-outage-intl-hnk"],["NBC News","https://www.nbcnews.com/tech/tech-news/outlook-widespread-outage-hits-microsoft-apps-rcna609047"],["ABC News","https://abcnews.com/US/outlook-down-microsoft-outage-reported-mail/story?id=138088203"]] },
 
   // Nov 11
   { d: "2026-11-11", cat: "elections", h: "Scott Colom flips Mississippi's Senate seat",
