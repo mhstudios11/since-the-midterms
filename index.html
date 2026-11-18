@@ -223,8 +223,8 @@ footer p { margin: 0 0 0.5rem; }
 
 <div class="wrap">
   <header class="mast">
-    <div class="eyebrow"><span>U.S. midterms · Nov 3, 2026</span><span>Updated Sun, Nov 15</span></div>
-    <h1>Since the Midterms: <span class="count" id="daycount">Day 11</span></h1>
+    <div class="eyebrow"><span>U.S. midterms · Nov 3, 2026</span><span>Updated Tue, Nov 17</span></div>
+    <h1>Since the Midterms: <span class="count" id="daycount">Day 14</span></h1>
     <p class="lede">Democrats won both chambers of Congress on November 3. Here is what has happened since then, at home and around the world: late race calls, a new fight in Washington, the Iran war, and the news that hasn't stopped. Newest first, with sources on every item.</p>
   </header>
 
@@ -619,7 +619,10 @@ try { localStorage.removeItem("stm-filter"); } catch (e) {}
 document.getElementById("cal").innerHTML = AHEAD.map(([t, h, s]) =>
   `<li><time>${t}</time><div><strong>${esc(h)}</strong><span>${esc(s)}</span></div></li>`).join("");
 
-document.getElementById("daycount").textContent = "Day " + dayN(days[0]);
+// Day counter follows the viewer's calendar date, never earlier than the newest event
+const now = new Date();
+const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+document.getElementById("daycount").textContent = "Day " + Math.max(dayN(today), dayN(days[0]));
 
 // Election results
 const srcHTML = s => `<div class="src">${s.map(([name, url]) => `<a href="${url}" target="_blank" rel="noopener">${esc(name)}</a>`).join("")}</div>`;
