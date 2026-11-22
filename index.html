@@ -242,7 +242,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 }
 /* The Reps */
 .contact-intro { display: grid; gap: 12px; }
-.state-pick { display: grid; gap: 8px; max-width: 360px; }
+.state-pick { display: grid; gap: 8px; }
 .state-pick label { font-family: var(--f-body); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-2); }
 .state-pick select {
   font: 600 1.1rem/1.4 var(--f-body); color: var(--ink); background: var(--sheet);
@@ -257,6 +257,14 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") center / contain no-repeat;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") center / contain no-repeat;
 }
+.tips { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; }
+.tip { padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+.tip svg { width: 32px; height: 32px; color: var(--ink); flex: none; }
+.tip h3 { font-family: var(--f-body); font-weight: 600; font-size: 1.25rem; line-height: 1.1; margin: 0; color: var(--ink); }
+.tip p { margin: 0; font-size: 1.125rem; line-height: 1.5; color: var(--ink-2); }
+.tip .callout { margin-top: auto; background: var(--vote-bg); border-radius: 8px; padding: 16px; font-size: 0.95rem; color: var(--ink); }
+.tip .callout b { font-weight: 600; }
+@media (max-width: 900px) { .tips { grid-template-columns: 1fr; gap: 20px; } }
 .reps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: 32px; }
 .reps:empty { display: none; }
 /* Flex column so the button sits at the bottom when cards in a row differ in height. */
@@ -363,6 +371,26 @@ footer p { margin: 0 0 0.5rem; }
       <h2 id="contact-h">The Reps</h2>
       <p class="aside-note">Your two senators and your House member answer to you. Their offices count calls and messages from people in their state or district, so start with them.</p>
     </div>
+    <!-- Tip cards (Figma frame 115:372, "The Reps / Content") -->
+    <div class="tips">
+      <div class="card tip">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 6C20.6819 6.4429 22.2161 7.32427 23.4459 8.55409C24.6757 9.78391 25.5571 11.3181 26 13"/><path d="M18 10C20.065 10.5525 21.4475 11.935 22 14"/><path d="M19.5488 19.1675C19.6872 19.0753 19.8465 19.0192 20.0122 19.0041C20.1779 18.989 20.3447 19.0156 20.4975 19.0812L26.3925 21.7225C26.5912 21.8074 26.757 21.9543 26.8651 22.1414C26.9733 22.3284 27.018 22.5454 26.9925 22.76C26.7983 24.2113 26.0836 25.5427 24.9813 26.5065C23.8791 27.4704 22.4642 28.0011 21 28C16.4913 28 12.1673 26.2089 8.97919 23.0208C5.79107 19.8327 4 15.5087 4 11C3.99888 9.53573 4.5296 8.12091 5.49345 7.01864C6.45731 5.91637 7.78869 5.20167 9.24 5.00747C9.45454 4.98199 9.67157 5.02666 9.8586 5.13482C10.0456 5.24299 10.1926 5.40881 10.2775 5.60747L12.9188 11.5075C12.9836 11.659 13.0101 11.8242 12.9957 11.9885C12.9813 12.1527 12.9265 12.3108 12.8363 12.4487L10.165 15.625C10.0702 15.768 10.0142 15.9331 10.0024 16.1042C9.99055 16.2753 10.0233 16.4466 10.0975 16.6012C11.1313 18.7175 13.3188 20.8787 15.4413 21.9025C15.5967 21.9763 15.7688 22.0084 15.9404 21.9954C16.112 21.9825 16.2773 21.925 16.42 21.8287L19.5488 19.1675Z"/></svg>
+        <h3>Contacting Your Rep</h3>
+        <p>When contacting your rep, say you're a constituent and give your ZIP code, name the bill, and how you want them to vote.</p>
+        <p class="callout">Example: “Hi, this is {<b>name here</b>} and I’m calling from {<b>zip code</b>} about H.R. 1234. I want you to vote {<b>yes/no</b>}.”</p>
+      </div>
+      <div class="card tip">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16C21 18.7614 18.7614 21 16 21C13.2386 21 11 18.7614 11 16C11 13.2386 13.2386 11 16 11C18.7614 11 21 13.2386 21 16Z"/><path d="M23 26C21.0988 27.2638 18.4538 28 16 28C13.6266 28 11.3066 27.2962 9.33316 25.9776C7.35977 24.6591 5.8217 22.7849 4.91345 20.5922C4.0052 18.3995 3.76756 15.9867 4.23058 13.6589C4.6936 11.3312 5.83649 9.19295 7.51472 7.51472C9.19295 5.83649 11.3312 4.6936 13.6589 4.23058C15.9867 3.76756 18.3995 4.0052 20.5922 4.91345C22.7849 5.8217 24.6591 7.35977 25.9776 9.33316C27.2962 11.3066 28 13.6266 28 16C28 18.7613 27 21 24.5 21C22 21 21 18.7613 21 16V11"/></svg>
+        <h3>Emails</h3>
+        <p>Senators don't publish email addresses, so the email button opens their official contact form.</p>
+      </div>
+      <div class="card tip">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15C21 17.7614 18.7614 20 16 20C13.2386 20 11 17.7614 11 15C11 12.2386 13.2386 10 16 10C18.7614 10 21 12.2386 21 15Z"/><path d="M7.97461 24.9212C8.727 23.4393 9.87506 22.1946 11.2915 21.3251C12.708 20.4557 14.3376 19.9955 15.9996 19.9955C17.6616 19.9955 19.2912 20.4557 20.7077 21.3251C22.1242 22.1946 23.2722 23.4393 24.0246 24.9212"/><path d="M25 16L28 19L31 16"/><path d="M1 16L4 13L7 16"/><path d="M4 13V16C3.99906 18.5406 4.8045 21.016 6.30033 23.0696C7.79615 25.1232 9.90517 26.6491 12.3236 27.4274C14.7421 28.2058 17.3452 28.1965 19.758 27.4008C22.1709 26.6052 24.2689 25.0643 25.75 23"/><path d="M28 19V16C28.0009 13.4594 27.1955 10.984 25.6997 8.9304C24.2038 6.87679 22.0948 5.35093 19.6764 4.57257C17.2579 3.79421 14.6548 3.80353 12.242 4.59918C9.82913 5.39483 7.73109 6.93575 6.25 9.00001"/></svg>
+        <h3>Changes Ahead</h3>
+        <p>New senators elected in November take office Jan. 3, and this page will switch to them.</p>
+        <p class="callout">Save the Date: <b>January 3, 2027</b></p>
+      </div>
+    </div>
     <div class="state-pick">
       <label for="state">Your state</label>
       <select id="state"><option value="">Choose a state</option></select>
@@ -383,7 +411,6 @@ footer p { margin: 0 0 0.5rem; }
         <div class="actions"><a class="btn btn-solid" href="https://www.whitehouse.gov/contact/" target="_blank" rel="noopener">Send a message <span id="ico-wh"></span></a></div>
       </div>
     </div>
-    <p class="aside-note">Tip: say you're a constituent and give your ZIP code, name the bill (for example, "H.R. 7008"), and say how you want them to vote. Senators don't publish email addresses, so the email button opens their official contact form. Contact details come from Senate.gov. New senators elected in November take office Jan. 3, and this page will switch to them then.</p>
   </section>
 </div>
 
