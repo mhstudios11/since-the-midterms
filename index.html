@@ -122,6 +122,14 @@ h1 .count { color: var(--accent); }
 .tab[aria-selected="true"] { font-weight: 700; border-bottom-color: var(--ink); }
 .tab:hover { color: var(--accent); }
 .card { background: var(--sheet); border-radius: 16px; box-shadow: var(--shadow); min-width: 0; }
+/* Link to the companion Georgia site */
+.xlink { display: grid; gap: 4px; margin-top: 40px; padding: 20px 24px; color: var(--ink); text-decoration: none; border: 1px solid transparent; }
+.xlink:hover { border-color: var(--accent); }
+.xlink:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.xlink-kicker { font-family: var(--f-mono); font-size: 0.8rem; color: var(--ink-2); }
+.xlink strong { font-size: 1.15rem; color: var(--accent); }
+.xlink strong::after { content: " ↗"; }
+.xlink-text { color: var(--ink-2); font-size: 0.95rem; }
 .chamber { padding: 18px 20px 20px; display: grid; gap: 10px; }
 .chamber h3 { font-family: var(--f-body); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; margin: 0; color: var(--ink-2); font-weight: 700; }
 .chamber .big { font-family: var(--f-display); font-size: 2rem; line-height: 1; }
@@ -225,7 +233,7 @@ footer p { margin: 0 0 0.5rem; }
 
 <div class="wrap">
   <header class="mast">
-    <div class="eyebrow"><span>U.S. midterms · Nov 3, 2026</span><span>Updated Tue, Nov 17</span></div>
+    <div class="eyebrow"><span>U.S. midterms · Nov 3, 2026</span><span>Updated Sun, Nov 22</span></div>
     <h1>Since the Midterms: <span class="count" id="daycount">Day 14</span></h1>
     <p class="lede">Democrats won both chambers of Congress on November 3. Here is what has happened since then, at home and around the world: late race calls, a new fight in Washington, the Iran war, and the news that hasn't stopped. Newest first, with sources on every item.</p>
   </header>
@@ -265,9 +273,9 @@ footer p { margin: 0 0 0.5rem; }
     <div class="power" aria-label="Balance of power in the next Congress">
       <div class="card chamber">
         <h3>Senate, next Congress</h3>
-        <div class="big">55 D · 44 R</div>
+        <div class="big">56 D · 44 R</div>
         <div class="seatbar" id="senatebar" aria-hidden="true"></div>
-        <p>Alaska is still uncalled. Mary Peltola (D) has 49.98% of first-choice votes to Sen. Dan Sullivan's (R) 45.93%. A win would make it 56.</p>
+        <p>Every race is called. Mary Peltola's win in Alaska on Nov. 17 settled the last one.</p>
       </div>
       <div class="card chamber">
         <h3>House, next Congress</h3>
@@ -288,7 +296,7 @@ footer p { margin: 0 0 0.5rem; }
     <div class="race-group" aria-labelledby="flips-h">
       <div>
         <h3 id="flips-h">More Flips</h3>
-        <p class="desc">Six more Senate seats and two governorships that changed parties.</p>
+        <p class="desc">Seven more Senate seats and two governorships that changed parties.</p>
       </div>
       <div class="races" id="races-flips"></div>
     </div>
@@ -296,17 +304,23 @@ footer p { margin: 0 0 0.5rem; }
     <div class="race-group" aria-labelledby="notable-h">
       <div>
         <h3 id="notable-h">Also Notable</h3>
-        <p class="desc">Holds, firsts, and a race still being counted.</p>
+        <p class="desc">Holds and firsts.</p>
       </div>
       <ul class="notable" id="races-notable"></ul>
     </div>
+
+    <a class="card xlink" href="https://mhstudios11.github.io/georgia-midterms-2026/" target="_blank" rel="noopener">
+      <span class="xlink-kicker">Georgia, race by race</span>
+      <strong>Georgia Midterms 2026</strong>
+      <span class="xlink-text">Vote counts for all 25 statewide and U.S. House races in Georgia, plus a timeline of the state's news since Election Day.</span>
+    </a>
   </section>
 </div>
 
 <div class="wrap">
   <footer>
     <p id="voice-note" hidden>Petitions are self-selected, so they show how many people signed, not what most voters think. Speaker of the House is a House job: Chuck Schumer and Cory Booker are senators, and the fight over them is the Senate Democratic leader race. Petition links go to Change.org; this site isn't affiliated with any of them.</p>
-    <p>Each item was checked against at least two news reports, and the links point to them. Facts still in dispute are described as reported, not settled. Seat counts follow NBC News and AP race calls as of November 16 and will change as the last races are called.</p>
+    <p>Each item was checked against at least two news reports, and the links point to them. Facts still in dispute are described as reported, not settled. Seat counts follow NBC News and AP race calls: the Senate as of November 17, when the last race was called, and the House as of November 16.</p>
     <p>Not included: reports that haven't been confirmed, such as U.S. men's soccer coach Mauricio Pochettino's reported move to Manchester United.</p>
   </footer>
 </div>
@@ -329,7 +343,38 @@ const CATS = {
 const ELECTION = "2026-11-03";
 
 const EVENTS = [
+  // Nov 22
+  { d: "2026-11-22", cat: "world", h: "The UN climate summit collapses without a deal",
+    p: "COP31 in Antalya ended two days late with no final agreement after the EU and others rejected a draft that didn't mention fossil fuels. It's the first UN climate summit without a headline deal since Copenhagen in 2009. Smaller pacts on geothermal energy and greener shipping routes survived. UN Secretary-General António Guterres said he was \"deeply disappointed.\"",
+    s: [["CBS News","https://www.cbsnews.com/news/un-cop31-climate-conference-ends-no-agreement-fossil-fuel-debate-standstill/"],["CBC","https://www.cbc.ca/news/world/cop31-talks-collapse-fossil-fuel-9.7431847"],["UN News","https://news.un.org/en/story/2026/11/1168855"]] },
+
+  // Nov 21
+  { d: "2026-11-21", cat: "iran", h: "Bahrain says Iran struck an industrial site as two tankers are hit near Hormuz",
+    p: "Bahrain said an Iranian strike set fire to a civilian industrial facility, with no casualties, after several attacks on the kingdom this week ended a weeks-long lull. Two tankers were hit in the Strait of Hormuz. Iran's foreign minister said talks on the strait are pointless unless Tehran's demands are met, including an end to the U.S. blockade of its ports.",
+    s: [["France 24 (AFP)","https://www.france24.com/en/middle-east/20261122-bahrain-accuses-iran-of-striking-industrial-site-as-tankers-hit-in-hormuz"],["Japan Times","https://www.japantimes.co.jp/news/2026/11/22/world/bahrain-iran-attack-hormuz/"],["RTÉ","https://www.rte.ie/news/middle-east/2026/1122/1600172-middle-east-iran/"]] },
+
+  // Nov 20
+  { d: "2026-11-20", cat: "elections", h: "Georgia certifies its results",
+    p: "Secretary of State Brad Raffensperger certified Georgia's Nov. 3 results, making Democratic wins official, including Gov.-elect Keisha Lance Bottoms and his own successor, Penny Brown Reynolds. It followed the largest statewide audit in Georgia history.",
+    s: [["Rough Draft Atlanta","https://roughdraftatlanta.com/2026/11/21/raffensperger-certifies-georgia-election-results/"],["Donalsonville News","https://www.donalsonvillenews.com/2026/11/21/its-official-raffensperger-certifies-nov-3-election-results/"]] },
+
+  // Nov 19
+  { d: "2026-11-19", cat: "whitehouse", h: "Trump, Xi and Putin meet together for the first time, with little to show",
+    p: "The three leaders met for about 90 minutes at the APEC summit in Shenzhen and signed a four-point declaration on strategic stability, agreeing there can be no winners in a nuclear war. There was no breakthrough on Ukraine, and the statement didn't mention the Iran war. Afterward, Putin ruled out direct talks with Ukraine.",
+    s: [["CBS News","https://www.cbsnews.com/news/trump-xi-putin-china-apec-summit/"],["RFE/RL","https://www.rferl.org/a/trump-xi-putin-summit-four-key-takeaways/33902100.html"],["Fox News","https://www.foxnews.com/world/trump-putin-xi-issue-4-point-declaration-historic-summit"]] },
+
+  // Nov 18
+  { d: "2026-11-18", cat: "congress", h: "House Democrats nominate Hakeem Jeffries for speaker, 251–11",
+    p: "Running unopposed, Jeffries is on track to become the first Black speaker when the new House votes in January. Eleven Democrats voted no, despite a petition against him that passed a million signatures. The caucus also chose Katherine Clark as majority leader, the first woman in that job.",
+    s: [["NPR","https://www.npr.org/2026/11/18/nx-s1-6043183/hakeem-jeffries-house-democrats-leadership-votes"],["CBS News","https://www.cbsnews.com/news/house-democrats-hakeem-jeffries-speaker-nomination-progressives/"],["Roll Call","https://rollcall.com/2026/11/18/democrats-nominate-jeffries-to-be-house-speaker-a-historic-first"],["CNBC","https://www.cnbc.com/2026/11/18/jeffries-house-speaker-congress.html"]] },
+
   // Nov 17
+  { d: "2026-11-17", cat: "elections", h: "Mary Peltola wins Alaska, the last Senate race called",
+    p: "The AP called the race after Peltola passed 50.1% of first-choice votes, so no ranked-choice count was needed. She unseats Sen. Dan Sullivan and will be the first Alaska Native in the U.S. Senate. Democrats will hold 56 seats. Alaska certifies its results Nov. 25.",
+    s: [["Alaska Public Media","https://alaskapublic.org/news/politics/elections/2026-11-17/mary-peltola-wins-u-s-senate-seat-in-alaska"],["ABC News","https://abcnews.com/Politics/democrat-mary-peltola-wins-alaska-senate-race-defeating/story?id=137983873"],["U.S. News (AP)","https://www.usnews.com/news/politics/articles/2026-11-17/why-ap-called-the-alaska-senate-race-for-democrat-mary-peltola"]] },
+  { d: "2026-11-17", cat: "economy", h: "Nvidia's first earnings without Jensen Huang: revenue doubles",
+    p: "Under interim CEO Colette Kress, Nvidia reported $115.8 billion in quarterly revenue, up 103% from a year ago, and raised its growth outlook. Kress called it \"business as usual.\" The board said it won't reinstate Huang.",
+    s: [["Nvidia (SEC filing)","https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000088/q3fy27pr.htm"],["Yahoo Finance","https://finance.yahoo.com/technology/live/nvidia-live-updates-interim-ceo-kress-prepares-for-q3-earnings-with-huang-reportedly-planning-comeback-153114076.html"],["PYMNTS","https://www.pymnts.com/earnings/2026/nvidia-signals-business-as-usual-under-interim-ceo/"]] },
   { d: "2026-11-17", cat: "iran", h: "U.S. strikes an Iranian missile site after a third drone attack on Bahrain",
     p: "U.S. forces hit a Revolutionary Guard missile launch site on Qeshm Island in the Strait of Hormuz, calling it self-defense. It followed Iran's third attempted drone strike on a U.S. base in Bahrain in five days. All were intercepted, with no U.S. injuries reported. Iran says the U.S. strikes caused no civilian damage.",
     s: [["Iran International","https://www.iranintl.com/en/202611172999"],["Xinhua (citing CBS News)","https://english.news.cn/20261118/4d068baf65e149b68edf59015482ca6b/c.html"],["Yahoo News","https://www.yahoo.com/news/world/articles/iran-live-updates-tanker-attacked-084617419.html"]] },
@@ -496,7 +541,7 @@ const ICON = {
 
 const PEOPLE = [
   { cat: "people", h: "More than a million people ask House Democrats for a different Speaker",
-    p: "A Change.org petition titled \"House Democrats: Choose a New Speaker\" asks members to vote for someone other than Hakeem Jeffries in January. It passed 1 million signatures within about a week, helped by actor Mark Ruffalo, and reports put it near 1.2 million by Nov. 13. Its creator discloses that she is paid in connection with the petition. No House Democrat has challenged Jeffries, and Rep. Jim Himes says Jeffries \"absolutely will be speaker.\" The caucus votes Nov. 18–19.",
+    p: "A Change.org petition titled \"House Democrats: Choose a New Speaker\" asks members to vote for someone other than Hakeem Jeffries in January. It passed 1 million signatures within about a week, helped by actor Mark Ruffalo, and reports put it near 1.2 million by Nov. 13. Its creator discloses that she is paid in connection with the petition. No House Democrat has challenged Jeffries, and Rep. Jim Himes says Jeffries \"absolutely will be speaker.\" On Nov. 18, the caucus nominated him 251–11.",
     a: [["ghost","Contact Your Rep",HOUSE],["solid","Sign the Petition","https://www.change.org/p/house-democrats-choose-a-new-speaker"]],
     s: [["Common Dreams","https://www.commondreams.org/news/petition-opposing-hakeem-jeffries-for-speaker"],["Newsweek","https://www.newsweek.com/petition-to-replace-jeffries-hits-500k-as-ruffalo-wades-in-12668658"],["Atlanta Black Star","https://atlantablackstar.com/?p=801534"],["Daily Signal","https://www.dailysignal.com/2026/11/13/left-wants-different-speaker-jeffries/"]] },
   { cat: "people", h: "Progressives push Ayanna Pressley as the alternative",
@@ -547,6 +592,8 @@ const RACES_FLIPS = [
     s: [["NBC News","https://www.nbcnews.com/politics/2026-election/annie-andrews-south-carolina-senate-win-darline-graham-gop-rcna603338"],["TIME","https://time.com/article/2026/11/04/south-carolina-senate-results-darline-graham-democrat-annie-andrews-republican/"]] },
   { label: "Texas governor flips", name: "Gina Hinojosa", sub: "Ousts Gov. Greg Abbott to become Texas's first Latina governor.",
     s: [["NPR","https://www.npr.org/2026/11/03/g-s1-150844/gina-hinojosa-texas-governor-abbott"],["KUT","https://www.kut.org/politics/2026-11-03/texas-governor-election-2026-hinojosa-early-results"]] },
+  { label: "Last race called", name: "Mary Peltola", sub: "Unseats Sen. Dan Sullivan. The first Alaska Native in the U.S. Senate.",
+    s: [["Alaska Public Media","https://alaskapublic.org/news/politics/elections/2026-11-17/mary-peltola-wins-u-s-senate-seat-in-alaska"],["ABC News","https://abcnews.com/Politics/democrat-mary-peltola-wins-alaska-senate-race-defeating/story?id=137983873"]] },
   { label: "Youngest in Alaska history", name: "Kreiss-Tomkins", who: "Jonathan Kreiss-Tomkins", sub: "At 37, Alaska's first Democratic governor since 2002.",
     s: [["NPR","https://www.npr.org/2026/11/14/g-s1-151719/midterms-alaska-governor-kreiss-tomkins"],["Washington Post","https://www.washingtonpost.com/politics/2026/11/14/democrat-jonathan-kreiss-tomkins-wins-alaska-governors-race/"]] },
 ];
@@ -556,8 +603,6 @@ const RACES_NOTABLE = [
     s: [["GPB","https://www.gpb.org/news/2026/11/03/jon-ossoff-wins-reelection-the-us-senate"],["WLRN (NPR)","https://www.wlrn.org/national-politics/2026-11-03/jon-ossoff-wins-reelection-in-georgia-easily-defeating-republican-mike-collins"]] },
   { office: "Illinois · Senate", name: "Juliana Stratton", text: "Keeps Dick Durbin's seat blue. With Angela Alsobrooks and Lisa Blunt Rochester, three Black women will serve in the Senate at once for the first time.",
     s: [["TheGrio","https://thegrio.com/2026/11/03/juliana-stratton-defeats-don-tracy-in-illinois-joining-historic-senate-vanguard/"],["CNBC","https://www.cnbc.com/2026/11/04/2026-midterm-election-results-live-updates.html"]] },
-  { office: "Alaska · Senate", name: "Mary Peltola, still counting", text: "Had 49.98% of first-choice votes on Nov. 16, just shy of an outright win, and has declared victory. A win would give Democrats 56 seats.",
-    s: [["Anchorage Daily News","https://www.adn.com/politics/2026/11/16/peltola-approaches-victory-in-alaskas-us-senate-race/"],["The Hill","https://thehill.com/homenews/campaign/6224075-peltola-leads-alaska-senate-race/"]] },
   { office: "Georgia · Attorney general", name: "Tanya Miller", text: "The first woman elected Georgia's attorney general.",
     s: [["WSB-TV","https://www.wsbtv.com/news/local/atlanta/georgia-elections-2026-live-updates-polls-open-election-day/ZFRV7BK7YZEK7P4OSGYR7UHJXY/"],["Georgia Recorder","https://georgiarecorder.com/2026/11/04/democrats-flip-statewide-offices-up-and-down-the-ballot-in-georgia-state-house-is-in-play/"]] },
   { office: "Georgia · Secretary of state", name: "Penny Brown Reynolds", text: "The first Black woman elected Georgia's secretary of state.",
@@ -569,12 +614,7 @@ const RACES_NOTABLE = [
 ];
 
 const AHEAD = [
-  ["Tue, Nov 17", "Nvidia reports earnings", "Its first report since Huang's resignation."],
-  ["Wed, Nov 18", "Alaska ranked-choice count could begin", "Only if no Senate candidate reaches 50%."],
-  ["Nov 18–19", "House Democrats elect their leaders", "Hakeem Jeffries is expected to be nominated for speaker, despite the petition against him."],
-  ["Nov 18–19", "Trump, Xi and Putin meet in China", "Expected to be the three leaders' first joint meeting, at the APEC summit in Shenzhen."],
-  ["Fri, Nov 20", "UN climate summit ends", "COP31 in Antalya, Turkey."],
-  ["Wed, Nov 25", "Alaska certifies its results", "The target date for a final answer in the last uncalled Senate race."],
+  ["Wed, Nov 25", "Alaska certifies its results", "Makes Mary Peltola's Senate win official."],
   ["Sun, Nov 29", "Spain votes in a snap election", "Called after the housing package failed in parliament."],
   ["Tue, Dec 1", "Senate Democrats choose a leader", "Schumer vs. Van Hollen, by secret ballot."],
   ["Dec 8–9", "Federal Reserve meeting", "Markets are pricing in a quarter-point rate hike."],
@@ -598,9 +638,9 @@ const itemHTML = e => `
       `<a class="btn btn-${kind}" href="${url}" target="_blank" rel="noopener">${esc(label)}${ICON[kind]}</a>`).join("")}</div>` : ""}
   </div>`;
 
-// Senate seat bar: 55 D, 1 uncalled, 44 R
+// Senate seat bar: 56 D, 44 R
 document.getElementById("senatebar").innerHTML =
-  Array.from({ length: 100 }, (_, i) => `<span class="${i < 55 ? "d" : i < 56 ? "u" : "r"}"></span>`).join("");
+  Array.from({ length: 100 }, (_, i) => `<span class="${i < 56 ? "d" : "r"}"></span>`).join("");
 
 // Timeline
 const days = [...new Set(EVENTS.map(e => e.d))].sort().reverse();
