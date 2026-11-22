@@ -251,6 +251,25 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   .road-now span { display: block; font-weight: 400; font-size: 0.8rem; color: var(--ink-2); }
   .bill h3 { font-size: 1.6rem; }
 }
+/* The Reps */
+.contact-intro { display: grid; gap: 12px; }
+.state-pick { display: grid; gap: 8px; max-width: 360px; }
+.state-pick label { font-family: var(--f-body); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-2); }
+.state-pick select {
+  font: 600 1.1rem/1.4 var(--f-body); color: var(--ink); background: var(--sheet);
+  border: 1px solid var(--rule); border-radius: 12px; padding: 12px 14px; box-shadow: var(--shadow);
+}
+.state-pick select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.reps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: 32px; }
+.reps:empty { display: none; }
+.rep { padding: 18px 20px 20px; display: grid; gap: 16px; align-content: start; }
+.rep h3 { font-family: var(--f-display); font-weight: 400; font-size: 2rem; line-height: 1.1; margin: 0; }
+.rep .what { margin: 0; font-size: 0.95rem; line-height: 1.5; color: var(--ink-2); }
+.rep-phone { font-family: var(--f-display); font-size: 1.75rem; line-height: 1; color: var(--accent); text-decoration: none; font-variant-numeric: tabular-nums; justify-self: start; }
+.rep-phone:hover { text-decoration: underline; }
+.rep .actions { margin-top: 0; gap: 8px; justify-content: flex-end; }
+.party-d { color: var(--c-elections); }
+.party-r { color: var(--c-whitehouse); }
 /* The People's Voice */
 .voice { padding-top: 48px; display: grid; gap: 48px; }
 .voice h2 { font-family: var(--f-display); font-weight: 400; font-size: 2.5rem; line-height: 1; margin: 0; }
@@ -287,7 +306,10 @@ footer p { margin: 0 0 0.5rem; }
 @media (max-width: 760px) {
   header.mast { padding-block: 32px 16px; gap: 20px; }
   .filters { padding-bottom: 16px; margin-top: 20px; }
-  .tab { min-width: 0; flex: 1; }
+  /* Five tabs don't fit a phone: keep them on one line and let the row scroll sideways. */
+  .tabs { overflow-x: auto; scrollbar-width: none; gap: 20px; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter); }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab { min-width: 0; flex: none; white-space: nowrap; }
   .voice { padding-top: 32px; gap: 32px; }
   .actions { justify-content: flex-start; }
   .chips { gap: 8px; }
@@ -311,6 +333,7 @@ footer p { margin: 0 0 0.5rem; }
   <div class="tabs" role="tablist" aria-label="Sections">
     <a class="tab" role="tab" id="tab-timeline" href="#timeline" aria-controls="timeline-panel" aria-selected="true">The Timeline</a>
     <a class="tab" role="tab" id="tab-bills" href="#bills" aria-controls="bills-panel" aria-selected="false">The Bills</a>
+    <a class="tab" role="tab" id="tab-contact" href="#reps" aria-controls="contact-panel" aria-selected="false">The Reps</a>
     <a class="tab" role="tab" id="tab-voice" href="#peoples-voice" aria-controls="voice-panel" aria-selected="false">The People’s Voice</a>
     <a class="tab" role="tab" id="tab-results" href="#election-results" aria-controls="results-panel" aria-selected="false">The Election Results</a>
   </div>
@@ -333,6 +356,36 @@ footer p { margin: 0 0 0.5rem; }
   <section class="wrap voice" aria-labelledby="bills-h">
     <h2 id="bills-h">The Bills</h2>
     <div class="bills" id="bills"></div>
+  </section>
+</div>
+
+<div id="contact-panel" role="tabpanel" aria-labelledby="tab-contact" hidden>
+  <section class="wrap voice" aria-labelledby="contact-h">
+    <div class="contact-intro">
+      <h2 id="contact-h">The Reps</h2>
+      <p class="aside-note">Your two senators and your House member answer to you. Their offices count calls and messages from people in their state or district, so start with them.</p>
+    </div>
+    <div class="state-pick">
+      <label for="state">Your state</label>
+      <select id="state"><option value="">Choose a state</option></select>
+    </div>
+    <div class="reps" id="senators" aria-live="polite"></div>
+    <div class="reps">
+      <div class="card rep">
+        <span class="bill-num">Your representative · U.S. House</span>
+        <h3>Find your House member</h3>
+        <p class="what">Enter your ZIP code on House.gov to get your representative's name, phone and contact form. Or call the Capitol switchboard and ask for them by name.</p>
+        <a class="rep-phone" href="tel:+12022243121">(202) 224-3121</a>
+        <div class="actions"><a class="btn btn-solid" href="https://www.house.gov/representatives/find-your-representative" target="_blank" rel="noopener">Find by ZIP code <span id="ico-zip"></span></a></div>
+      </div>
+      <div class="card rep">
+        <span class="bill-num">The President · White House</span>
+        <h3>Contact the White House</h3>
+        <p class="what">For anything the president controls, like the Iran war or signing a bill. The White House takes messages through its online form; it no longer lists a public comment line.</p>
+        <div class="actions"><a class="btn btn-solid" href="https://www.whitehouse.gov/contact/" target="_blank" rel="noopener">Send a message <span id="ico-wh"></span></a></div>
+      </div>
+    </div>
+    <p class="aside-note">Tip: say you're a constituent and give your ZIP code, name the bill (for example, "H.R. 7008"), and say how you want them to vote. Senators don't publish email addresses, so the email button opens their official contact form. Contact details come from Senate.gov. New senators elected in November take office Jan. 3, and this page will switch to them then.</p>
   </section>
 </div>
 
@@ -866,14 +919,143 @@ const billHTML = b => {
 };
 document.getElementById("bills").innerHTML = BILLS.map(billHTML).join("");
 
-// Tabs: #timeline (default), #bills, #peoples-voice, #election-results
-const TABS = { "timeline": ["tab-timeline", "timeline-panel"], "bills": ["tab-bills", "bills-panel"],"peoples-voice": ["tab-voice", "voice-panel"], "election-results": ["tab-results", "results-panel"] };
+// The Reps. SENATORS: [state, name, party, DC office phone, contact form URL],
+// from Senate.gov's official list (senate.gov/general/contact_information/senators_cfm.xml), Nov 22, 2026.
+// Replace with the new Senate's list on Jan. 3, 2027.
+const SENATORS = [
+  ["AK", "Lisa Murkowski", "R", "(202) 224-6665", "https://www.murkowski.senate.gov/public/index.cfm/contact"],
+  ["AK", "Dan Sullivan", "R", "(202) 224-3004", "https://www.sullivan.senate.gov/contact/email"],
+  ["AL", "Katie Boyd Britt", "R", "(202) 224-5744", "https://www.britt.senate.gov/contact/"],
+  ["AL", "Tommy Tuberville", "R", "(202) 224-4124", "https://www.tuberville.senate.gov/contact/contact-form/"],
+  ["AR", "John Boozman", "R", "(202) 224-4843", "https://www.boozman.senate.gov/public/index.cfm/contact"],
+  ["AR", "Tom Cotton", "R", "(202) 224-2353", "https://www.cotton.senate.gov/contact/contact-tom"],
+  ["AZ", "Ruben Gallego", "D", "(202) 224-4521", "https://www.gallego.senate.gov/connect/"],
+  ["AZ", "Mark Kelly", "D", "(202) 224-2235", "https://www.kelly.senate.gov/contact/contact-form/"],
+  ["CA", "Alex Padilla", "D", "(202) 224-3553", "https://www.padilla.senate.gov/contact/"],
+  ["CA", "Adam B. Schiff", "D", "(202) 224-3841", "https://www.schiff.senate.gov/contact/"],
+  ["CO", "Michael F. Bennet", "D", "(202) 224-5852", "https://www.bennet.senate.gov/public/index.cfm/contact"],
+  ["CO", "John W. Hickenlooper", "D", "(202) 224-5941", "https://www.hickenlooper.senate.gov/contact/"],
+  ["CT", "Richard Blumenthal", "D", "(202) 224-2823", "https://www.blumenthal.senate.gov/contact/"],
+  ["CT", "Christopher Murphy", "D", "(202) 224-4041", "https://www.murphy.senate.gov/contact"],
+  ["DE", "Christopher A. Coons", "D", "(202) 224-5042", "https://www.coons.senate.gov/contact"],
+  ["DE", "Lisa Blunt Rochester", "D", "(202) 224-2441", "https://www.bluntrochester.senate.gov/contact/"],
+  ["FL", "Ashley Moody", "R", "(202) 224-3041", "https://www.moody.senate.gov/contact-us/"],
+  ["FL", "Rick Scott", "R", "(202) 224-5274", "https://www.rickscott.senate.gov/contact/contact"],
+  ["GA", "Jon Ossoff", "D", "(202) 224-3521", "https://www.ossoff.senate.gov/contact-us/"],
+  ["GA", "Raphael G. Warnock", "D", "(202) 224-3643", "https://www.warnock.senate.gov/contact/"],
+  ["HI", "Mazie K. Hirono", "D", "(202) 224-6361", "https://www.hirono.senate.gov/contact"],
+  ["HI", "Brian Schatz", "D", "(202) 224-3934", "https://www.schatz.senate.gov/contact"],
+  ["IA", "Joni Ernst", "R", "(202) 224-3254", "https://www.ernst.senate.gov/public/index.cfm/contact"],
+  ["IA", "Chuck Grassley", "R", "(202) 224-3744", "https://www.grassley.senate.gov/contact"],
+  ["ID", "Mike Crapo", "R", "(202) 224-6142", "https://www.crapo.senate.gov/contact"],
+  ["ID", "James E. Risch", "R", "(202) 224-2752", "https://www.risch.senate.gov/contact/"],
+  ["IL", "Tammy Duckworth", "D", "(202) 224-2854", "https://www.duckworth.senate.gov/content/contact-senator"],
+  ["IL", "Richard J. Durbin", "D", "(202) 224-2152", "https://www.durbin.senate.gov/contact/"],
+  ["IN", "Jim Banks", "R", "(202) 224-4814", "https://www.banks.senate.gov/contact/"],
+  ["IN", "Todd Young", "R", "(202) 224-5623", "https://www.young.senate.gov/contact"],
+  ["KS", "Roger Marshall", "R", "(202) 224-4774", "https://www.marshall.senate.gov/contact/"],
+  ["KS", "Jerry Moran", "R", "(202) 224-6521", "https://www.moran.senate.gov/public/index.cfm/e-mail-jerry"],
+  ["KY", "Mitch McConnell", "R", "(202) 224-2541", "https://www.mcconnell.senate.gov/public/index.cfm?p=contact"],
+  ["KY", "Rand Paul", "R", "(202) 224-4343", "https://www.paul.senate.gov/connect/email-rand"],
+  ["LA", "Bill Cassidy", "R", "(202) 224-5824", "https://www.cassidy.senate.gov/contact"],
+  ["LA", "John Kennedy", "R", "(202) 224-4623", "https://www.kennedy.senate.gov/public/email-me"],
+  ["MA", "Edward J. Markey", "D", "(202) 224-2742", "https://www.markey.senate.gov/contact"],
+  ["MA", "Elizabeth Warren", "D", "(202) 224-4543", "https://www.warren.senate.gov/contact/"],
+  ["MD", "Angela D. Alsobrooks", "D", "(202) 224-4524", "https://www.alsobrooks.senate.gov/contact/"],
+  ["MD", "Chris Van Hollen", "D", "(202) 224-4654", "https://www.vanhollen.senate.gov/contact/email"],
+  ["ME", "Susan M. Collins", "R", "(202) 224-2523", "https://www.collins.senate.gov/contact"],
+  ["ME", "Angus S., Jr. King", "I", "(202) 224-5344", "https://www.king.senate.gov/contact"],
+  ["MI", "Gary C. Peters", "D", "(202) 224-6221", "https://www.peters.senate.gov/contact/email-gary"],
+  ["MI", "Elissa Slotkin", "D", "(202) 224-4822", "https://www.slotkin.senate.gov/contact/"],
+  ["MN", "Amy Klobuchar", "D", "(202) 224-3244", "https://www.klobuchar.senate.gov/public/index.cfm/contact"],
+  ["MN", "Tina Smith", "D", "(202) 224-5641", "https://www.smith.senate.gov/share-your-opinion/"],
+  ["MO", "Josh Hawley", "R", "(202) 224-6154", "https://www.hawley.senate.gov/contact-senator-hawley"],
+  ["MO", "Eric Schmitt", "R", "(202) 224-5721", "https://www.schmitt.senate.gov/contact/"],
+  ["MS", "Cindy Hyde-Smith", "R", "(202) 224-5054", "https://www.hydesmith.senate.gov/contact-senator"],
+  ["MS", "Roger F. Wicker", "R", "(202) 224-6253", "https://www.wicker.senate.gov/public/index.cfm/contact"],
+  ["MT", "Steve Daines", "R", "(202) 224-2651", "https://www.daines.senate.gov/connect/email-steve"],
+  ["MT", "Tim Sheehy", "R", "(202) 224-2644", "https://www.sheehy.senate.gov/contact/"],
+  ["NC", "Ted Budd", "R", "(202) 224-3154", "https://www.budd.senate.gov/contact/"],
+  ["NC", "Thom Tillis", "R", "(202) 224-6342", "https://www.tillis.senate.gov/public/index.cfm/email-me"],
+  ["ND", "Kevin Cramer", "R", "(202) 224-2043", "https://www.cramer.senate.gov/contact/contact-kevin"],
+  ["ND", "John Hoeven", "R", "(202) 224-2551", "https://www.hoeven.senate.gov/contact/contact-the-senator"],
+  ["NE", "Deb Fischer", "R", "(202) 224-6551", "https://www.fischer.senate.gov/public/index.cfm/contact"],
+  ["NE", "Pete Ricketts", "R", "(202) 224-4224", "https://www.ricketts.senate.gov/contact/"],
+  ["NH", "Margaret Wood Hassan", "D", "(202) 224-3324", "https://www.hassan.senate.gov/content/contact-senator"],
+  ["NH", "Jeanne Shaheen", "D", "(202) 224-2841", "https://www.shaheen.senate.gov/contact/contact-jeanne"],
+  ["NJ", "Cory A. Booker", "D", "(202) 224-3224", "https://www.booker.senate.gov/?p=contact"],
+  ["NJ", "Andy Kim", "D", "(202) 224-4744", "https://www.kim.senate.gov/contact/"],
+  ["NM", "Martin Heinrich", "D", "(202) 224-5521", "https://www.heinrich.senate.gov/contact"],
+  ["NM", "Ben Ray Luján", "D", "(202) 224-6621", "https://www.lujan.senate.gov/contact/"],
+  ["NV", "Catherine Cortez Masto", "D", "(202) 224-3542", "https://www.cortezmasto.senate.gov/contact"],
+  ["NV", "Jacky Rosen", "D", "(202) 224-6244", "https://www.rosen.senate.gov/contact_jacky"],
+  ["NY", "Kirsten E. Gillibrand", "D", "(202) 224-4451", "https://www.gillibrand.senate.gov/contact/email-me"],
+  ["NY", "Charles E. Schumer", "D", "(202) 224-6542", "https://www.schumer.senate.gov/contact/email-chuck"],
+  ["OH", "Jon Husted", "R", "(202) 224-3353", "https://www.husted.senate.gov/contact/"],
+  ["OH", "Bernie Moreno", "R", "(202) 224-2315", "https://www.moreno.senate.gov/contact/"],
+  ["OK", "Alan Armstrong", "R", "(202) 224-4721", "https://www.armstrong.senate.gov/contact/"],
+  ["OK", "James Lankford", "R", "(202) 224-5754", "https://www.lankford.senate.gov/contact/email"],
+  ["OR", "Jeff Merkley", "D", "(202) 224-3753", "https://www.merkley.senate.gov/contact/"],
+  ["OR", "Ron Wyden", "D", "(202) 224-5244", "https://www.wyden.senate.gov/contact/"],
+  ["PA", "John Fetterman", "D", "(202) 224-4254", "https://www.fetterman.senate.gov/contact/"],
+  ["PA", "David McCormick", "R", "(202) 224-6324", "https://www.mccormick.senate.gov/contact/"],
+  ["RI", "Jack Reed", "D", "(202) 224-4642", "https://www.reed.senate.gov/contact/"],
+  ["RI", "Sheldon Whitehouse", "D", "(202) 224-2921", "https://www.whitehouse.senate.gov/contact/email-sheldon"],
+  ["SC", "Darline Graham", "R", "(202) 224-5972", "https://www.dgraham.senate.gov/"],
+  ["SC", "Tim Scott", "R", "(202) 224-6121", "https://www.scott.senate.gov/contact/email-me"],
+  ["SD", "Mike Rounds", "R", "(202) 224-5842", "https://www.rounds.senate.gov/contact/email-mike"],
+  ["SD", "John Thune", "R", "(202) 224-2321", "https://www.thune.senate.gov/public/index.cfm/contact"],
+  ["TN", "Marsha Blackburn", "R", "(202) 224-3344", "https://www.blackburn.senate.gov/email-me"],
+  ["TN", "Bill Hagerty", "R", "(202) 224-4944", "https://www.hagerty.senate.gov/email-me/"],
+  ["TX", "John Cornyn", "R", "(202) 224-2934", "https://www.cornyn.senate.gov/contact"],
+  ["TX", "Ted Cruz", "R", "(202) 224-5922", "https://www.cruz.senate.gov/?p=form&id=16"],
+  ["UT", "John R. Curtis", "R", "(202) 224-5251", "https://www.curtis.senate.gov/contact/"],
+  ["UT", "Mike Lee", "R", "(202) 224-5444", "https://www.lee.senate.gov/public/index.cfm/contact"],
+  ["VA", "Tim Kaine", "D", "(202) 224-4024", "https://www.kaine.senate.gov/contact"],
+  ["VA", "Mark R. Warner", "D", "(202) 224-2023", "https://www.warner.senate.gov/public/index.cfm?p=Contact"],
+  ["VT", "Bernard Sanders", "I", "(202) 224-5141", "https://www.sanders.senate.gov/contact/"],
+  ["VT", "Peter Welch", "D", "(202) 224-4242", "https://www.welch.senate.gov/email-peter/"],
+  ["WA", "Maria Cantwell", "D", "(202) 224-3441", "https://www.cantwell.senate.gov/public/index.cfm/email-maria"],
+  ["WA", "Patty Murray", "D", "(202) 224-2621", "https://www.murray.senate.gov/write-to-patty/"],
+  ["WI", "Tammy Baldwin", "D", "(202) 224-5653", "https://www.baldwin.senate.gov/feedback"],
+  ["WI", "Ron Johnson", "R", "(202) 224-5323", "https://www.ronjohnson.senate.gov/public/index.cfm/email-the-senator"],
+  ["WV", "Shelley Moore Capito", "R", "(202) 224-6472", "https://www.capito.senate.gov/contact/contact-shelley"],
+  ["WV", "James C. Justice", "R", "(202) 224-3954", "https://www.justice.senate.gov/contact/"],
+  ["WY", "John Barrasso", "R", "(202) 224-6441", "https://www.barrasso.senate.gov/public/index.cfm/contact-form"],
+  ["WY", "Cynthia M. Lummis", "R", "(202) 224-3424", "https://www.lummis.senate.gov/contact/contact-form/"]
+];
+const STATES = { AL:"Alabama",AK:"Alaska",AZ:"Arizona",AR:"Arkansas",CA:"California",CO:"Colorado",CT:"Connecticut",DE:"Delaware",FL:"Florida",GA:"Georgia",HI:"Hawaii",ID:"Idaho",IL:"Illinois",IN:"Indiana",IA:"Iowa",KS:"Kansas",KY:"Kentucky",LA:"Louisiana",ME:"Maine",MD:"Maryland",MA:"Massachusetts",MI:"Michigan",MN:"Minnesota",MS:"Mississippi",MO:"Missouri",MT:"Montana",NE:"Nebraska",NV:"Nevada",NH:"New Hampshire",NJ:"New Jersey",NM:"New Mexico",NY:"New York",NC:"North Carolina",ND:"North Dakota",OH:"Ohio",OK:"Oklahoma",OR:"Oregon",PA:"Pennsylvania",RI:"Rhode Island",SC:"South Carolina",SD:"South Dakota",TN:"Tennessee",TX:"Texas",UT:"Utah",VT:"Vermont",VA:"Virginia",WA:"Washington",WV:"West Virginia",WI:"Wisconsin",WY:"Wyoming" };
+const PARTY = { D: "Democrat", R: "Republican", I: "Independent" };
+const stateSel = document.getElementById("state");
+stateSel.insertAdjacentHTML("beforeend", Object.entries(STATES).sort((a, b) => a[1].localeCompare(b[1]))
+  .map(([k, v]) => `<option value="${k}">${v}</option>`).join(""));
+document.getElementById("ico-zip").outerHTML = ICON.ghost;
+document.getElementById("ico-wh").outerHTML = ICON.ghost;
+function showSenators() {
+  const st = stateSel.value;
+  try { localStorage.setItem("stm-state", st); } catch (e) {}
+  document.getElementById("senators").innerHTML = !st ? "" : SENATORS.filter(s => s[0] === st).map(([, name, p, phone, form]) =>
+    `<div class="card rep">
+      <span class="bill-num">U.S. Senator · <span class="party-${p.toLowerCase()}">${PARTY[p] || p}</span>, ${STATES[st]}</span>
+      <h3>${esc(name)}</h3>
+      <a class="rep-phone" href="tel:+1${phone.replace(/\D/g, "")}" aria-label="Call ${esc(name)}'s office at ${phone}">${phone}</a>
+      <p class="what">Washington office. Staff answer weekdays and pass messages to the senator.</p>
+      <div class="actions"><a class="btn btn-solid" href="${form}" target="_blank" rel="noopener">Send an email ${ICON.ghost}</a></div>
+    </div>`).join("");
+}
+stateSel.addEventListener("change", showSenators);
+try { const saved = localStorage.getItem("stm-state"); if (saved && STATES[saved]) stateSel.value = saved; } catch (e) {}
+showSenators();
+
+// Tabs: #timeline (default), #bills, #reps, #peoples-voice, #election-results
+const TABS = { "timeline": ["tab-timeline", "timeline-panel"], "bills": ["tab-bills", "bills-panel"], "reps": ["tab-contact", "contact-panel"], "peoples-voice": ["tab-voice", "voice-panel"], "election-results": ["tab-results", "results-panel"] };
 function showTab() {
   const want = location.hash.slice(1);
   const key = TABS[want] ? want : "timeline";
   for (const [k, [t, p]] of Object.entries(TABS)) {
     const on = k === key;
     document.getElementById(t).setAttribute("aria-selected", String(on));
+    if (on) document.getElementById(t).scrollIntoView({ block: "nearest", inline: "nearest" });
     document.getElementById(p).hidden = !on;
   }
   document.getElementById("voice-note").hidden = key !== "peoples-voice";
