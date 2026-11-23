@@ -332,7 +332,7 @@ footer p { margin: 0 0 0.5rem; }
 
 <div class="wrap">
   <header class="mast">
-    <div class="eyebrow"><span>U.S. midterms · Nov 3, 2026</span><span>Updated Sun, Nov 22</span></div>
+    <div class="eyebrow"><span>U.S. midterms · Nov 3, 2026</span><span>Updated Mon, Nov 23</span></div>
     <h1>Since the Midterms: <span class="count" id="daycount">Day 14</span></h1>
     <p class="lede">Democrats won both chambers of Congress on November 3. Here is what has happened since then, at home and around the world: late race calls, a new fight in Washington, the Iran war, and the news that hasn't stopped. Newest first, with sources on every item.</p>
   </header>
@@ -501,7 +501,21 @@ const CATS = {
 const ELECTION = "2026-11-03";
 
 const EVENTS = [
+  // Nov 23
+  { d: "2026-11-23", cat: "world", h: "Ukraine says its sea drones sank a Russian warship off Libya",
+    p: "President Volodymyr Zelenskyy said seven Ukrainian-made naval drones sank the Russian corvette Merkury near Benghazi on Sunday and also hit a Russian transport ship. It carries the war far from Ukraine, into the Mediterranean. Libya's eastern government called the attack an assault on its sovereignty, and the UN mission in Libya called for an investigation.",
+    s: [["NBC News","https://www.nbcnews.com/world/ukraine/ukraine-sinks-russian-warship-merkury-libya-naval-drones-war-rcna610822"],["Al Jazeera","https://www.aljazeera.com/news/2026/11/23/zelenskyy-says-ukraine-behind-drone-attacks-on-russian-ships-near-libya"]] },
+  { d: "2026-11-23", cat: "iran", dev: true, h: "Iran vows to use \"all available means\" against the U.S. blockade",
+    p: "Iran's Foreign Ministry spokesman said Tehran will use every means it has to counter the U.S. naval blockade of its ports, and that the Strait of Hormuz could reopen within two days if Washington meets Iran's conditions. Bahrain said two people were hurt in Saturday's Iranian strike on an industrial site on Sitra Island, after early reports said no one was injured. Saudi Arabia and the Arab League condemned the attack.",
+    s: [["Al Jazeera","https://www.aljazeera.com/news/2026/11/23/iran-says-it-will-use-all-available-means-to-counter-us-blockade"],["Eurasia Review (Arab News)","https://www.eurasiareview.com/23112026-bahrain-says-two-injured-in-iranian-attack-on-industrial-site-as-tankers-hit-in-hormuz/"]] },
+
   // Nov 22
+  { d: "2026-11-22", cat: "disaster", dev: true, h: "The Army moves the Iowa detonation to Wednesday and says it doesn't need the paused permit",
+    p: "The Army said it will blow up the degraded lead azide at the Iowa Army Ammunition Plant on Wednesday, citing the weather and time to put safety measures in place. Justice Department lawyers told the federal appeals court that an emergency exemption in EPA rules lets the Army act without the permit the court put on hold. Environmental groups called it a way around the court. Residents near the plant have been told to stay inside and bring pets and livestock indoors.",
+    s: [["NBC News (AP)","https://www.nbcnews.com/news/us-news/army-plans-invoke-emergency-provisions-detonate-bomb-making-chemicals-rcna610769"],["ABC News","https://abcnews.com/US/army-moves-detonation-10000-pounds-lead-azide-wedneday/story?id=138330909"],["Al Jazeera","https://www.aljazeera.com/news/2026/11/23/extremely-concerning-inside-a-us-army-plan-to-detonate-iowa-lead-stores"]] },
+  { d: "2026-11-22", cat: "whitehouse", h: "Trump hosts a dinner for top holders of his meme coin, now worth under $1",
+    p: "Trump hosted the biggest holders of his $TRUMP meme coin at his golf club outside Washington on Sunday night. The coin peaked at $74 and now trades below $1. Ethics watchdogs and Democratic senators have criticized the dinners as a way to profit from the presidency. The White House referred questions to the company behind the coin.",
+    s: [["NBC News","https://www.nbcnews.com/politics/donald-trump/trump-hosts-exclusive-dinner-investors-declining-meme-coin-rcna610757"],["Al Jazeera (Reuters)","https://www.aljazeera.com/news/2026/11/22/trump-to-host-private-dinner-for-largest-owners-of-his-meme-coin"]] },
   { d: "2026-11-22", cat: "outages", h: "A Delta system outage delays thousands of flights days before Thanksgiving",
     p: "Delta's weight-and-balance system, which works out how each plane is loaded, went down Sunday morning. The FAA briefly stopped Atlanta-bound Delta flights, and delays spread across Delta's hubs as crews switched to manual workarounds. The FAA said the problem was Delta's alone and not air traffic control. It's the second major air-travel disruption since the Nov. 13 nationwide ground stop.",
     s: [["CNN","https://www.cnn.com/2026/11/22/us/delta-airlines-ground-delay"],["Fox News","https://www.foxnews.com/us/faa-lifts-ground-stop-atlanta-bound-delta-flights-system-outage"],["Simple Flying","https://simpleflying.com/delta-weight-balance-outage-atlanta-ground-stop-thanksgiving/"]] },
@@ -510,7 +524,7 @@ const EVENTS = [
     s: [["CBS News","https://www.cbsnews.com/news/un-cop31-climate-conference-ends-no-agreement-fossil-fuel-debate-standstill/"],["CBC","https://www.cbc.ca/news/world/cop31-talks-collapse-fossil-fuel-9.7431847"],["UN News","https://news.un.org/en/story/2026/11/1168855"]] },
 
   // Nov 21
-  { d: "2026-11-21", cat: "iran", dev: true, h: "Bahrain says Iran struck an industrial site as two tankers are hit near Hormuz",
+  { d: "2026-11-21", cat: "iran", h: "Bahrain says Iran struck an industrial site as two tankers are hit near Hormuz",
     p: "Bahrain said an Iranian strike set fire to a civilian industrial facility, with no casualties, after several attacks on the kingdom this week ended a weeks-long lull. Two tankers were hit in the Strait of Hormuz. Iran's foreign minister said talks on the strait are pointless unless Tehran's demands are met, including an end to the U.S. blockade of its ports.",
     s: [["France 24 (AFP)","https://www.france24.com/en/middle-east/20261122-bahrain-accuses-iran-of-striking-industrial-site-as-tankers-hit-in-hormuz"],["Japan Times","https://www.japantimes.co.jp/news/2026/11/22/world/bahrain-iran-attack-hormuz/"],["RTÉ","https://www.rte.ie/news/middle-east/2026/1122/1600172-middle-east-iran/"]] },
 
@@ -519,7 +533,7 @@ const EVENTS = [
     s: [["CNBC","https://www.cnbc.com/2026/11/21/trump-fbi-database-hack.html"],["ABC News","https://abcnews.com/US/fbis-national-crime-database-targeted-hack-trump/story?id=138347810"],["Al Jazeera","https://www.aljazeera.com/news/2026/11/21/fbi-national-crime-database-suffers-suspected-breach-reports"]] },
 
   // Nov 20
-  { d: "2026-11-20", cat: "disaster", dev: true, h: "The Army says it may blow up the Iowa explosives even with its permit on hold",
+  { d: "2026-11-20", cat: "disaster", h: "The Army says it may blow up the Iowa explosives even with its permit on hold",
     p: "After a federal appeals court paused the EPA permit for the detonation, Justice Department lawyers told the court that EPA rules let the Army act without a permit in an emergency. The Army says the lead azide could go off on its own if left in place. Environmental groups called that an extreme step and asked the court to keep the pause. The court has not yet ruled on their request.",
     s: [["CBS News","https://www.cbsnews.com/news/us-army-iowa-plant-detonation-court-records/"],["Fortune","https://fortune.com/2026/11/21/court-pauses-army-iowa-lead-azide-detonation-permit/"]] },
   { d: "2026-11-20", cat: "whitehouse", h: "Trump jokes that Stephen Miller should run for president",
@@ -789,6 +803,7 @@ const RACES_NOTABLE = [
 
 const AHEAD = [
   ["Wed, Nov 25", "Alaska certifies its results", "Makes Mary Peltola's Senate win official."],
+  ["Wed, Nov 25", "The Army's planned Iowa detonation", "Pushed back twice, with the permit still on hold in court."],
   ["Sun, Nov 29", "Spain votes in a snap election", "Called after the housing package failed in parliament."],
   ["Tue, Dec 1", "Senate Democrats choose a leader", "Schumer vs. Van Hollen, by secret ballot."],
   ["Dec 8–9", "Federal Reserve meeting", "Markets are pricing in a quarter-point rate hike."],
