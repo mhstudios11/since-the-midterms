@@ -332,7 +332,7 @@ footer p { margin: 0 0 0.5rem; }
 
 <div class="wrap">
   <header class="mast">
-    <div class="eyebrow"><span>U.S. midterms · Nov 3, 2026</span><span>Updated Mon, Nov 23</span></div>
+    <div class="eyebrow"><span>U.S. midterms · Nov 3, 2026</span><span>Updated Tue, Nov 24</span></div>
     <h1>Since the Midterms: <span class="count" id="daycount">Day 14</span></h1>
     <p class="lede">Democrats won both chambers of Congress on November 3. Here is what has happened since then, at home and around the world: late race calls, a new fight in Washington, the Iran war, and the news that hasn't stopped. Newest first, with sources on every item.</p>
   </header>
@@ -501,8 +501,25 @@ const CATS = {
 const ELECTION = "2026-11-03";
 
 const EVENTS = [
+  // Nov 24
+  { d: "2026-11-24", cat: "iran", dev: true, h: "Iran's army chief orders Hormuz closed \"further day by day\" as Qatar pushes for talks",
+    p: "Iran's army commander, Maj. Gen. Amir Hatami, ordered the navy to keep tightening its hold on the Strait of Hormuz until the U.S. meets Iran's seven conditions, including an end to the naval blockade. He warned any new U.S. attack would bring a harsher response. Qatar's prime minister met Secretary of State Marco Rubio and Vice President JD Vance in Washington to urge a return to talks. Iran's navy said tankers hit mines in the strait, a claim that has not been independently confirmed.",
+    s: [["Euronews","https://www.euronews.com/2026/11/24/iran-orders-hormuz-closed-further-day-by-day-as-qatar-seeks-to-revive-peace-talks"],["The New Arab","https://www.newarab.com/news/iran-insists-its-seven-conditions-talks-us"],["CBS News","https://www.cbsnews.com/live-updates/iran-war-us-trump-blockade-strait-of-hormuz-ship-attacks/"]] },
+  { d: "2026-11-24", cat: "world", h: "Russian warplanes trigger a rare air raid alert on a South Korean island",
+    p: "South Korea scrambled fighter jets and issued an air raid alert for Ulleung Island after several Russian military planes entered its air defense zone. Early alerts wrongly named a North Korean aircraft. The military said the planes never entered South Korea's airspace and left as its forces responded. Seoul summoned Russia's defense attaché.",
+    s: [["Washington Post","https://www.washingtonpost.com/world/2026/11/23/south-north-korea-tensions-airspace-ulleung-island/5371f39a-e795-11f1-8db0-6f1e3c389e7c_story.html"],["Stars and Stripes","https://www.stripes.com/theaters/asia_pacific/2026-11-24/south-korea-russia-scramble-aircraft-ulleung-23560956.html"],["UPI","https://www.upi.com/Top_News/World-News/2026/11/24/korea-Russia-warplanes-KADIZ-Ulleung-Island-emergency-alert/5211795507595"]] },
+
   // Nov 23
-  { d: "2026-11-23", cat: "disaster", dev: true, h: "Trump orders the Army to hold off on the Iowa detonation",
+  { d: "2026-11-23", cat: "disaster", dev: true, h: "Appeals court clears the Iowa detonation, and the Army says it will go ahead Wednesday",
+    p: "A federal appeals court panel turned down environmental groups' request to block the Army's permit and lifted its pause. It said the degraded explosives risk an unplanned explosion. Acting Army Secretary Adam Telle said the detonation will happen Wednesday morning, based on the wind forecast, and the Army said Gov. Kim Reynolds supports it. Gov.-elect Rob Sand said the administration should decide based on its experts' information and asked it to make the briefings public.",
+    s: [["CBS News","https://www.cbsnews.com/news/army-iowa-explosives-trump-appeals-court/"],["NBC News","https://www.nbcnews.com/science/environment/trump-postpones-planned-detonation-toxic-drums-iowa-army-facility-rcna610945"],["CNBC","https://www.cnbc.com/2026/11/24/iowa-detonation-bomb-court-.html"]] },
+  { d: "2026-11-23", cat: "whitehouse", h: "Trump tells the Justice Department to seek the death penalty for child killers",
+    p: "Trump announced a directive telling federal prosecutors to seek death sentences in child murder cases and in killings tied to rape or trafficking, and to speed up federal executions. He also asked Congress to pass the Just Punishment for Murder Act. He used the event to criticize California Gov. Gavin Newsom's plan to commute 548 death sentences.",
+    s: [["Washington Examiner","http://www.washingtonexaminer.com/news/white-house/4813088/trump-federal-death-penalty-directive-newsom-clemency/"],["New Straits Times","https://www.nst.com.my/world/world/2026/11/1584618/trump-tells-justice-department-seek-death-penalty-child-killers-rapists"]] },
+  { d: "2026-11-23", cat: "world", h: "Indonesia says 24 people died in a candy factory fire",
+    p: "Police confirmed 24 deaths from a fire that broke out Saturday at a candy factory in Banten province, about an hour from Jakarta. Dozens of workers are still missing, and identifying victims through DNA could take weeks. The cause is under investigation.",
+    s: [["Al Jazeera","https://www.aljazeera.com/news/2026/11/23/indonesian-police-remove-24-body-bags-from-factory-fire-site"],["Euronews","https://www.euronews.com/2026/11/23/at-least-24-people-killed-in-indonesia-factory-fire-police-say"],["Korea Herald (Reuters)","https://www.koreaherald.com/article/10946223"]] },
+  { d: "2026-11-23", cat: "disaster", h: "Trump orders the Army to hold off on the Iowa detonation",
     p: "Trump said on Truth Social that he told the military not to blow up the lead azide at the Iowa Army Ammunition Plant unless the federal appeals court and Iowa Gov.-elect Rob Sand, a Democrat, approve. He said he would hold Sand responsible for any harm if Sand says no. Over the weekend, Justice Department lawyers had said the Army would go ahead Wednesday despite the court's pause. Sand had called for a delay.",
     s: [["CBS News","https://www.cbsnews.com/news/trump-tells-army-to-halt-detonation-in-iowa-this-week/"],["Washington Post","https://www.washingtonpost.com/climate-environment/2026/11/23/trump-orders-military-halt-iowa-detonation-plan/"],["KCRG","https://www.kcrg.com/2026/11/23/president-trump-orders-military-pause-iowa-detonation/"]] },
   { d: "2026-11-23", cat: "economy", h: "Nvidia's board brings back Jensen Huang as CEO",
@@ -517,7 +534,7 @@ const EVENTS = [
   { d: "2026-11-23", cat: "world", h: "Ukraine says its sea drones sank a Russian warship off Libya",
     p: "President Volodymyr Zelenskyy said seven Ukrainian-made naval drones sank the Russian corvette Merkury near Benghazi on Sunday and also hit a Russian transport ship. It carries the war far from Ukraine, into the Mediterranean. Libya's eastern government called the attack an assault on its sovereignty, and the UN mission in Libya called for an investigation.",
     s: [["NBC News","https://www.nbcnews.com/world/ukraine/ukraine-sinks-russian-warship-merkury-libya-naval-drones-war-rcna610822"],["Al Jazeera","https://www.aljazeera.com/news/2026/11/23/zelenskyy-says-ukraine-behind-drone-attacks-on-russian-ships-near-libya"]] },
-  { d: "2026-11-23", cat: "iran", dev: true, h: "Iran vows to use \"all available means\" against the U.S. blockade",
+  { d: "2026-11-23", cat: "iran", h: "Iran vows to use \"all available means\" against the U.S. blockade",
     p: "Iran's Foreign Ministry spokesman said Tehran will use every means it has to counter the U.S. naval blockade of its ports, and that the Strait of Hormuz could reopen within two days if Washington meets Iran's conditions. Bahrain said two people were hurt in Saturday's Iranian strike on an industrial site on Sitra Island, after early reports said no one was injured. Saudi Arabia and the Arab League condemned the attack.",
     s: [["Al Jazeera","https://www.aljazeera.com/news/2026/11/23/iran-says-it-will-use-all-available-means-to-counter-us-blockade"],["Eurasia Review (Arab News)","https://www.eurasiareview.com/23112026-bahrain-says-two-injured-in-iranian-attack-on-industrial-site-as-tankers-hit-in-hormuz/"]] },
 
@@ -815,8 +832,9 @@ const RACES_NOTABLE = [
 
 const AHEAD = [
   ["Wed, Nov 25", "Alaska certifies its results", "Makes Mary Peltola's Senate win official."],
-  ["Wed, Nov 25", "The Army's planned Iowa detonation", "On hold: Trump told the Army to wait for the court and Gov.-elect Rob Sand."],
+  ["Wed, Nov 25", "The Army's planned Iowa detonation", "The appeals court cleared it, and the Army says it will go ahead in the morning."],
   ["Sun, Nov 29", "Spain votes in a snap election", "Called after the housing package failed in parliament."],
+  ["Tue, Dec 1", "Estonia closes its border with Russia", "All road crossings shut for at least six months."],
   ["Tue, Dec 1", "Senate Democrats choose a leader", "Schumer vs. Van Hollen, by secret ballot."],
   ["Dec 8–9", "Federal Reserve meeting", "Markets are pricing in a quarter-point rate hike."],
   ["Fri, Dec 11", "Government funding runs out", "Congress needs a deal or another stopgap to avoid a shutdown."],
