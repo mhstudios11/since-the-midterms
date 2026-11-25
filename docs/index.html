@@ -42,6 +42,7 @@ img { max-width: 100%; }
   --pill-ink: #43474f; --pill-gray: #eceff1; --pill-green: #e8f5e9; --pill-red: #ffebee; --pill-topic: #e8eaf6;
   --vote-bg: #f1f2f9; --road-todo: #d9def3; --road-halo: #cfd9f8;
   --ink-3: #757575; --nav-ink: #153794; --nav-bg: rgba(255, 255, 255, 0.8); --brand: #343330;
+  --navm-sel: #153794; --navm-sel-ink: #ffffff;
 
   --f-display: "Anton", "Impact", "Arial Narrow", sans-serif;
   --f-body: "DM Sans", "Helvetica Neue", Arial, sans-serif;
@@ -58,6 +59,7 @@ img { max-width: 100%; }
     --c-iran: #f0b35c; --c-economy: #5cc6dd; --c-disaster: #a5afc0; --c-world: #f28dbb; --c-health: #a3d86b; --c-outages: #fb923c; --seat-uncalled: #4a5568;
     --pill-ink: #dfe3ec; --pill-gray: #263042; --pill-green: #1d3a28; --pill-red: #47222a; --pill-topic: #262f52; --vote-bg: #1b2333; --road-todo: #2e3a55; --road-halo: #33427a;
     --ink-3: #8f99ab; --nav-ink: #b9c8ff; --nav-bg: rgba(21, 28, 40, 0.85); --brand: #c9d0dc;
+    --navm-sel: #b9c8ff; --navm-sel-ink: #0e131c;
     color-scheme: dark;
   }
 }
@@ -68,6 +70,7 @@ img { max-width: 100%; }
   --c-iran: #f0b35c; --c-economy: #5cc6dd; --c-disaster: #a5afc0; --c-world: #f28dbb; --c-health: #a3d86b; --c-outages: #fb923c; --seat-uncalled: #4a5568;
     --pill-ink: #dfe3ec; --pill-gray: #263042; --pill-green: #1d3a28; --pill-red: #47222a; --pill-topic: #262f52; --vote-bg: #1b2333; --road-todo: #2e3a55; --road-halo: #33427a;
     --ink-3: #8f99ab; --nav-ink: #b9c8ff; --nav-bg: rgba(21, 28, 40, 0.85); --brand: #c9d0dc;
+    --navm-sel: #b9c8ff; --navm-sel-ink: #0e131c;
   color-scheme: dark;
 }
 
@@ -159,6 +162,14 @@ header.mast.sub .lede { max-width: 848px; font-size: 1rem; color: var(--ink-3); 
 .tab:hover { background: color-mix(in srgb, var(--accent) 9%, transparent); }
 .tab[aria-selected="true"] { background: var(--accent); color: var(--accent-ink); }
 .tab[aria-selected="true"]:hover { background: color-mix(in srgb, var(--accent) 88%, transparent); }
+.tab .ico, .tab .short { display: none; }
+/* Phone icons (Figma 136:7534 "Mobile Nav - Update"), drawn in the text color through a mask. */
+.ico { width: 16px; height: 16px; flex: none; background: currentColor; -webkit-mask: var(--i) center / 16px 16px no-repeat; mask: var(--i) center / 16px 16px no-repeat; }
+.ico-news { --i: url("assets/newspaper-clipping.svg"); }
+.ico-bills { --i: url("assets/gavel.svg"); }
+.ico-reps { --i: url("assets/user-focus.svg"); }
+.ico-voice { --i: url("assets/hand-fist.svg"); }
+.ico-results { --i: url("assets/user-circle-check-nav.svg"); }
 .card { background: var(--sheet); border-radius: 16px; box-shadow: var(--shadow); min-width: 0; }
 /* Link to the companion Georgia site */
 .xlink { display: grid; gap: 4px; margin-top: 40px; padding: 20px 24px; color: var(--ink); text-decoration: none; border: 1px solid transparent; }
@@ -350,9 +361,19 @@ footer p { margin: 0 0 0.5rem; }
 @media (max-width: 760px) {
   header.mast { padding-block: 32px 16px; gap: 20px; }
   .filters { padding-top: 32px; }
-  /* Five tabs don't fit a phone: the nav pill keeps one line and scrolls sideways. */
-  .topnav { margin-top: 16px; }
-  .topnav-in { gap: 8px; padding-inline: 12px; }
+  /* Phones: the nav becomes a floating bar at the bottom with icons and short labels (Figma 136:7534). */
+  body { padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 104px); }
+  .topnav { position: fixed; top: auto; left: 0; right: 0; bottom: calc(env(safe-area-inset-bottom, 0px) + 16px); margin: 0; }
+  .topnav-in { padding: 12px; }
+  .brand, .tab .long { display: none; }
+  .tabs { gap: 16px; overflow: visible; }
+  .tab { flex-direction: column; justify-content: center; gap: 4px; height: auto; min-width: 52px; padding: 6px 4px; font-size: 0.75rem; line-height: 1.2; }
+  .tab .ico { display: block; }
+  .tab .short { display: inline; }
+  .tab:hover { background: none; }
+  .tab:active { background: color-mix(in srgb, var(--accent) 9%, transparent); }
+  .tab[aria-selected="true"], .tab[aria-selected="true"]:hover { background: var(--navm-sel); color: var(--navm-sel-ink); }
+  header.mast { padding-top: 40px; }
   .stamp { font-size: 2rem; margin-bottom: 32px; }
   #days .day, .ahead { padding-top: 40px; }
   #days .day:not([hidden]) ~ .day:not([hidden]) { margin-top: 40px; }
@@ -367,17 +388,21 @@ footer p { margin: 0 0 0.5rem; }
   .cal li { grid-template-columns: 1fr; gap: 0.2rem; }
   .notable li { grid-template-columns: 1fr; gap: 0.2rem; }
 }
+@media (max-width: 380px) {
+  .tabs { gap: 4px; }
+  .topnav-in { padding: 10px 8px; }
+}
 </style>
 
 <nav class="topnav" aria-label="Sections">
   <div class="topnav-in">
     <a class="brand" href="#timeline" aria-label="Since the Midterms, latest news"></a>
     <div class="tabs" role="tablist">
-      <a class="tab" role="tab" id="tab-timeline" href="#timeline" aria-controls="timeline-panel" aria-selected="true">The News</a>
-      <a class="tab" role="tab" id="tab-bills" href="#bills" aria-controls="bills-panel" aria-selected="false">The Bills</a>
-      <a class="tab" role="tab" id="tab-contact" href="#reps" aria-controls="contact-panel" aria-selected="false">The Reps</a>
-      <a class="tab" role="tab" id="tab-voice" href="#peoples-voice" aria-controls="voice-panel" aria-selected="false">The People’s Voice</a>
-      <a class="tab" role="tab" id="tab-results" href="#election-results" aria-controls="results-panel" aria-selected="false">The Election Results</a>
+      <a class="tab" role="tab" id="tab-timeline" href="#timeline" aria-controls="timeline-panel" aria-selected="true"><span class="ico ico-news"></span><span class="long">The News</span><span class="short">News</span></a>
+      <a class="tab" role="tab" id="tab-bills" href="#bills" aria-controls="bills-panel" aria-selected="false"><span class="ico ico-bills"></span><span class="long">The Bills</span><span class="short">Bills</span></a>
+      <a class="tab" role="tab" id="tab-contact" href="#reps" aria-controls="contact-panel" aria-selected="false"><span class="ico ico-reps"></span><span class="long">The Reps</span><span class="short">Reps</span></a>
+      <a class="tab" role="tab" id="tab-voice" href="#peoples-voice" aria-controls="voice-panel" aria-selected="false"><span class="ico ico-voice"></span><span class="long">The People’s Voice</span><span class="short">Voices</span></a>
+      <a class="tab" role="tab" id="tab-results" href="#election-results" aria-controls="results-panel" aria-selected="false"><span class="ico ico-results"></span><span class="long">The Election Results</span><span class="short">Elections</span></a>
     </div>
   </div>
 </nav>
