@@ -22,5 +22,7 @@ HEAD
   cat index.html
   printf '\n</body>\n</html>\n'
 } > docs/index.html
+mkdir -p docs/assets
+cp assets/* docs/assets/
 touch docs/.nojekyll
 echo "Built docs/index.html"
