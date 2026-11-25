@@ -133,7 +133,7 @@ header.mast.sub .lede { max-width: 848px; font-size: 1rem; color: var(--ink-3); 
 .topnav { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); z-index: 20; display: flex; justify-content: center; margin-top: 40px; padding-inline: 12px; pointer-events: none; }
 .topnav-in {
   pointer-events: auto; display: flex; align-items: center; gap: 16px; max-width: 100%;
-  padding: 8px 16px; border-radius: 16px; background: var(--nav-bg); box-shadow: var(--shadow);
+  padding: 8px 3px; border-radius: 16px; background: var(--nav-bg); box-shadow: var(--shadow); /* sides: 1px stroke + 3px + 12px tab padding = text 16px from the edge */
   border: 1px solid var(--nav-line);
   -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
 }
