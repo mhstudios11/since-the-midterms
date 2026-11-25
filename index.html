@@ -393,7 +393,7 @@ footer p { margin: 0 0 0.5rem; }
 
 <div class="wrap">
   <header class="mast" id="mast">
-    <div class="eyebrow"><span>U.S. midterms · Nov 3, 2026</span><span>Updated Tue, Nov 24</span></div>
+    <div class="eyebrow"><span>U.S. midterms · Nov 3, 2026</span><span>Updated Wed, Nov 25</span></div>
     <h1 id="mast-h">Since the Midterms: <span class="count" id="daycount">Day 14</span></h1>
     <p class="lede" id="mast-lede">Democrats won both chambers of Congress on November 3. Here is what has happened since then, at home and around the world: late race calls, a new fight in Washington, the Iran war, and the news that hasn't stopped. Newest first, with sources on every item.</p>
   </header>
@@ -547,7 +547,18 @@ const CATS = {
 const ELECTION = "2026-11-03";
 
 const EVENTS = [
+  // Nov 25
+  { d: "2026-11-25", cat: "economy", h: "Asian stock markets dive as AI doubts return",
+    p: "Chip and tech stocks led steep drops in Taiwan, South Korea and Japan on Wednesday. The selloff erased the rally that followed Jensen Huang's return as Nvidia's CEO. Nvidia's shares fell on Tuesday after their record jump on Monday. Investors are questioning how much companies are spending on AI.",
+    s: [["Al Jazeera","https://www.aljazeera.com/news/2026/11/25/asias-stock-markets-dive-as-doubts-to-swirl-over-ai-boom"],["Local 10 (AP)","https://www.local10.com/business/2026/11/24/asian-stocks-mostly-decline-as-ai-shares-fall-following-a-retreat-on-wall-street/"]] },
+  { d: "2026-11-25", cat: "disaster", h: "Storms on both coasts threaten Thanksgiving travel and the Macy's parade",
+    p: "A storm system is bringing heavy rain and thunderstorms to the Southeast on Wednesday, then rain and strong winds to the mid-Atlantic and Northeast on Thanksgiving. Forecasters expect flight delays at major Eastern hubs and backups on I-95. Wind gusts in New York could keep the Macy's parade balloons from flying in its 100th year, and the city says that's a game-time decision. Atmospheric river storms are bringing flooding and mountain snow in the West.",
+    s: [["NBC News","https://www.nbcnews.com/weather/storms/severe-thanksgiving-storms-threaten-millions-travelers-macys-parade-rcna611071"],["The Weather Channel","https://weather.com/2026/11/25/holiday/thanksgiving/thanksgiving-travel-weather-forecast-us-storms"],["NBC Boston","https://www.nbcboston.com/news/local/thanksgiving-2026-weather-storm-wind-rain/4054775/"]] },
+
   // Nov 24
+  { d: "2026-11-24", cat: "elections", h: "Democrats clinch at least 259 House seats, the biggest majority since 1990",
+    p: "The AP called Tennessee's 4th District for Democrat Victoria Broderick over Rep. Scott DesJarlais, giving Democrats at least 259 seats. They have gained 45 seats since Election Day, more than the 40 they picked up in 2018. Three races are still open: one in Minnesota and two in Louisiana that go to December runoffs.",
+    s: [["ABC News (AP)","https://abcnews.com/amp/Politics/wireStory/democrats-clinch-historic-house-majority-259-seats-largest-138418247"],["Washington Post","https://www.washingtonpost.com/politics/2026/11/24/democrats-house-majority-election-2026-congress/87d84dac-e838-11f1-8db0-6f1e3c389e7c_story.html"],["Spectrum News","https://spectrumlocalnews.com/hi/hawaii/politics/2026/11/24/democrats-house-majority-259-seats"]] },
   { d: "2026-11-24", cat: "iran", dev: true, h: "Iran's army chief orders Hormuz closed \"further day by day\" as Qatar pushes for talks",
     p: "Iran's army commander, Maj. Gen. Amir Hatami, ordered the navy to keep tightening its hold on the Strait of Hormuz until the U.S. meets Iran's seven conditions, including an end to the naval blockade. He warned any new U.S. attack would bring a harsher response. Qatar's prime minister met Secretary of State Marco Rubio and Vice President JD Vance in Washington to urge a return to talks. Iran's navy said tankers hit mines in the strait, a claim that has not been independently confirmed.",
     s: [["Euronews","https://www.euronews.com/2026/11/24/iran-orders-hormuz-closed-further-day-by-day-as-qatar-seeks-to-revive-peace-talks"],["The New Arab","https://www.newarab.com/news/iran-insists-its-seven-conditions-talks-us"],["CBS News","https://www.cbsnews.com/live-updates/iran-war-us-trump-blockade-strait-of-hormuz-ship-attacks/"]] },
