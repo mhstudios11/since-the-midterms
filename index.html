@@ -30,8 +30,8 @@
   --seat-uncalled: #9aa5b8;
   --pill-ink: #43474f; --pill-gray: #eceff1; --pill-green: #e8f5e9; --pill-red: #ffebee; --pill-topic: #e8eaf6;
   --vote-bg: #f1f2f9; --road-todo: #d9def3; --road-halo: #cfd9f8;
-  --ink-3: #757575; --nav-ink: #153794; --nav-bg: rgba(255, 255, 255, 0.8); --brand: #343330;
-  --navm-sel: #153794; --navm-sel-ink: #ffffff;
+  --ink-3: #757575; --nav-ink: #153794; --nav-bg: rgba(255, 255, 255, 0.8);
+  --navm-sel: #153794; --navm-sel-ink: #ffffff; --nav-line: rgba(20, 28, 43, 0.08);
 
   --f-display: "Anton", "Impact", "Arial Narrow", sans-serif;
   --f-body: "DM Sans", "Helvetica Neue", Arial, sans-serif;
@@ -47,8 +47,8 @@
     --c-elections: #7f9dff; --c-congress: #c39bf0; --c-whitehouse: #f08a80; --c-courts: #7cc9a2;
     --c-iran: #f0b35c; --c-economy: #5cc6dd; --c-disaster: #a5afc0; --c-world: #f28dbb; --c-health: #a3d86b; --c-outages: #fb923c; --seat-uncalled: #4a5568;
     --pill-ink: #dfe3ec; --pill-gray: #263042; --pill-green: #1d3a28; --pill-red: #47222a; --pill-topic: #262f52; --vote-bg: #1b2333; --road-todo: #2e3a55; --road-halo: #33427a;
-    --ink-3: #8f99ab; --nav-ink: #b9c8ff; --nav-bg: rgba(21, 28, 40, 0.85); --brand: #c9d0dc;
-    --navm-sel: #b9c8ff; --navm-sel-ink: #0e131c;
+    --ink-3: #8f99ab; --nav-ink: #b9c8ff; --nav-bg: rgba(21, 28, 40, 0.85);
+    --navm-sel: #b9c8ff; --navm-sel-ink: #0e131c; --nav-line: rgba(255, 255, 255, 0.08);
     color-scheme: dark;
   }
 }
@@ -58,8 +58,8 @@
   --c-elections: #7f9dff; --c-congress: #c39bf0; --c-whitehouse: #f08a80; --c-courts: #7cc9a2;
   --c-iran: #f0b35c; --c-economy: #5cc6dd; --c-disaster: #a5afc0; --c-world: #f28dbb; --c-health: #a3d86b; --c-outages: #fb923c; --seat-uncalled: #4a5568;
     --pill-ink: #dfe3ec; --pill-gray: #263042; --pill-green: #1d3a28; --pill-red: #47222a; --pill-topic: #262f52; --vote-bg: #1b2333; --road-todo: #2e3a55; --road-halo: #33427a;
-    --ink-3: #8f99ab; --nav-ink: #b9c8ff; --nav-bg: rgba(21, 28, 40, 0.85); --brand: #c9d0dc;
-    --navm-sel: #b9c8ff; --navm-sel-ink: #0e131c;
+    --ink-3: #8f99ab; --nav-ink: #b9c8ff; --nav-bg: rgba(21, 28, 40, 0.85);
+    --navm-sel: #b9c8ff; --navm-sel-ink: #0e131c; --nav-line: rgba(255, 255, 255, 0.08);
   color-scheme: dark;
 }
 
@@ -134,12 +134,8 @@ header.mast.sub .lede { max-width: 848px; font-size: 1rem; color: var(--ink-3); 
 .topnav-in {
   pointer-events: auto; display: flex; align-items: center; gap: 16px; max-width: 100%;
   padding: 8px 16px; border-radius: 16px; background: var(--nav-bg); box-shadow: var(--shadow);
+  border: 1px solid var(--nav-line);
   -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
-}
-.brand {
-  width: 24px; height: 24px; flex: none; background: var(--brand);
-  -webkit-mask: url("assets/user-circle-check.svg") center / 24px 24px no-repeat;
-  mask: url("assets/user-circle-check.svg") center / 24px 24px no-repeat;
 }
 .tabs { display: flex; gap: 8px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
 .tabs::-webkit-scrollbar { display: none; }
@@ -317,7 +313,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 /* The People's Voice */
 .voice { padding-top: 64px; display: grid; gap: 48px; }
 .voice h2 { font-family: var(--f-display); font-weight: 400; font-size: 2.5rem; line-height: 1; margin: 0; }
-.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 24px; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 24px; margin-bottom: 24px; }
 .stat { padding: 18px 20px 20px; display: grid; gap: 16px; align-content: start; }
 .actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 16px; margin-top: 24px; }
 .btn {
@@ -354,7 +350,7 @@ footer p { margin: 0 0 0.5rem; }
   body { padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 104px); }
   .topnav { position: fixed; top: auto; left: 0; right: 0; bottom: calc(env(safe-area-inset-bottom, 0px) + 16px); margin: 0; }
   .topnav-in { padding: 12px; }
-  .brand, .tab .long { display: none; }
+  .tab .long { display: none; }
   .tabs { gap: 16px; overflow: visible; }
   .tab { flex-direction: column; justify-content: center; gap: 4px; height: auto; min-width: 52px; padding: 6px 4px; font-size: 0.75rem; line-height: 1.2; }
   .tab .ico { display: block; }
@@ -385,7 +381,6 @@ footer p { margin: 0 0 0.5rem; }
 
 <nav class="topnav" aria-label="Sections">
   <div class="topnav-in">
-    <a class="brand" href="#timeline" aria-label="Since the Midterms, latest news"></a>
     <div class="tabs" role="tablist">
       <a class="tab" role="tab" id="tab-timeline" href="#timeline" aria-controls="timeline-panel" aria-selected="true"><span class="ico ico-news"></span><span class="long">The News</span><span class="short">News</span></a>
       <a class="tab" role="tab" id="tab-bills" href="#bills" aria-controls="bills-panel" aria-selected="false"><span class="ico ico-bills"></span><span class="long">The Bills</span><span class="short">Bills</span></a>
