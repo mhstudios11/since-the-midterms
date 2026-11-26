@@ -203,11 +203,10 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .row { display: grid; grid-template-columns: var(--label-col) minmax(0, 1fr); gap: 0 32px; border-top: 1px solid var(--rule); padding-block: 40px 72px; }
 .row[hidden] { display: none !important; }
 /* News days (Figma 129:6422 Stamp, 129:6424 Items): a centered stamp over a 1104px column. */
-#days .day, .ahead { display: block; max-width: 1104px; margin-inline: auto; border-top: 0; padding-block: 64px 0; }
+#days .day { display: block; max-width: 1104px; margin-inline: auto; border-top: 0; padding-block: 64px 0; }
 #days .day:not([hidden]) ~ .day:not([hidden]) { border-top: 1px solid var(--rule); margin-top: 72px; }
 .stamp { font-family: var(--f-display); font-weight: 400; font-size: 2.6rem; line-height: 0.95; text-transform: uppercase; text-align: center; margin: 0 0 48px; }
 .stamp .dn { color: var(--accent); }
-.ahead { padding-top: 96px; }
 .label { align-self: start; display: grid; gap: 9px; }
 .sticky-label { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 6.5rem); }
 .label .dn, .label h2 { font-family: var(--f-display); font-weight: 400; font-size: 2.6rem; line-height: 0.95; margin: 0; }
@@ -342,13 +341,20 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .aside-note { margin: 0; font-size: 0.95rem; color: var(--ink-2); max-width: 46rem; }
 
 /* Coming up */
+/* Coming up: a row of small date cards between the topic chips and the newest day.
+   About 3.5 cards show at once, so the cut-off card hints that the row scrolls. Filters don't hide it. */
+.ahead { max-width: 1104px; margin-inline: auto; padding-top: 48px; }
+.ahead-h { font-family: var(--f-mono); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); margin: 0 0 12px; }
 .cal { min-width: 0; }
-.cal ul { margin: 0; padding: 0; }
-.cal li { list-style: none; display: grid; grid-template-columns: 144px 1fr; gap: 16px; padding-block: 13px; border-bottom: 1px solid var(--rule); }
-.cal li:first-child { padding-top: 0; }
-.cal time { font-family: var(--f-mono); font-size: 0.85rem; color: var(--ink-2); font-variant-numeric: tabular-nums; padding-top: 0.15rem; }
-.cal strong { font-weight: 700; }
-.cal span { display: block; color: var(--ink-2); font-size: 1rem; }
+.cal ul {
+  list-style: none; margin: 0 -8px; padding: 4px 8px 20px; display: grid; grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 3 * 16px) / 3.5); gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory;
+  scroll-padding-inline: 8px; scrollbar-width: thin;
+}
+.cal li { scroll-snap-align: start; display: flex; flex-direction: column; gap: 6px; padding: 16px 20px 18px; }
+.cal time { font-family: var(--f-mono); font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--accent); font-variant-numeric: tabular-nums; }
+.cal strong { font-weight: 700; font-size: 1rem; line-height: 1.3; }
+.cal span { display: block; color: var(--ink-2); font-size: 0.9rem; line-height: 1.45; }
 
 /* Footer (Figma 129:6407, nodes 158:7599-7608): notes, a rule, then the centered credit line. */
 footer { max-width: 1192px; margin: 96px auto 0; padding-block: 32px 48px; border-top: 1px solid var(--rule); font-size: 0.875rem; line-height: 1.55; color: var(--ink-2); }
@@ -376,7 +382,9 @@ footer .credit a:hover { text-decoration: underline; }
   .tab[aria-selected="true"], .tab[aria-selected="true"]:hover { background: var(--navm-sel); color: var(--navm-sel-ink); }
   header.mast { padding-top: 40px; }
   .stamp { font-size: 2rem; margin-bottom: 32px; }
-  #days .day, .ahead { padding-top: 40px; }
+  #days .day { padding-top: 40px; }
+  .ahead { padding-top: 32px; }
+  .cal ul { grid-auto-columns: 78%; gap: 12px; }
   #days .day:not([hidden]) ~ .day:not([hidden]) { margin-top: 40px; }
   .voice { padding-top: 32px; gap: 32px; }
   .actions { justify-content: flex-start; }
@@ -386,7 +394,6 @@ footer .credit a:hover { text-decoration: underline; }
   .sticky-label { position: static; }
   .label.day-label { display: flex; align-items: baseline; gap: 0.75rem; }
   .label .dn, .label h2 { font-size: 2rem; }
-  .cal li { grid-template-columns: 1fr; gap: 0.2rem; }
   .notable li { grid-template-columns: 1fr; gap: 0.2rem; }
 }
 @media (max-width: 380px) {
@@ -420,11 +427,11 @@ footer .credit a:hover { text-decoration: underline; }
     <div class="wrap"><div class="chips" id="chips"></div></div>
   </nav>
   <main class="wrap">
-    <div id="days"></div>
     <section class="ahead" aria-labelledby="ahead-h">
-      <h2 class="stamp" id="ahead-h">Coming Up</h2>
+      <h2 class="ahead-h" id="ahead-h">Coming up</h2>
       <div class="cal"><ul id="cal"></ul></div>
     </section>
+    <div id="days"></div>
   </main>
 </div>
 
@@ -1026,7 +1033,7 @@ try { localStorage.removeItem("stm-filter"); } catch (e) {}
 
 // Upcoming
 document.getElementById("cal").innerHTML = AHEAD.map(([t, h, s]) =>
-  `<li><time>${t}</time><div><strong>${esc(h)}</strong><span>${esc(s)}</span></div></li>`).join("");
+  `<li class="card"><time>${t}</time><strong>${esc(h)}</strong><span>${esc(s)}</span></li>`).join("");
 
 // Day counter follows the viewer's calendar date, never earlier than the newest event
 const now = new Date();
