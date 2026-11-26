@@ -334,6 +334,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
    and a "See more" button. Shows 6 cards on desktop and 3 stacked on phones; the button reveals the rest.
    Filters don't hide it. */
 .ahead { max-width: 1104px; margin-inline: auto; padding-top: 64px; padding-bottom: 16px; }
+.ahead[hidden] { display: none; }
 .ahead-h { font-family: var(--f-mono); font-size: 0.78rem; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-2); text-align: center; margin: 0 0 12px; }
 .cal ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 24px; }
 .cal li { display: flex; flex-direction: column; gap: 6px; padding: 16px; }
@@ -946,13 +947,14 @@ const RACES_NOTABLE = [
     s: [["Axios Atlanta","https://www.axios.com/local/atlanta/2026/11/09/ottoms-georgias-promise-medicaid-expansion-budget-republican-senate"],["Georgia Recorder","https://georgiarecorder.com/2026/11/04/democrats-flip-statewide-offices-up-and-down-the-ballot-in-georgia-state-house-is-in-play/"]] },
 ];
 
+// [date, event, note, topic]. The topic uses the same keys as the chips, so filters show only matching dates.
 const AHEAD = [
-  ["Sun, Nov 29", "Spain votes in a snap election", "Called after the housing package failed in parliament."],
-  ["Tue, Dec 1", "Estonia closes its border with Russia", "All road crossings shut for at least six months."],
-  ["Tue, Dec 1", "Senate Democrats choose a leader", "Schumer vs. Van Hollen, by secret ballot."],
-  ["Dec 8–9", "Federal Reserve meeting", "Markets are pricing in a quarter-point rate hike."],
-  ["Fri, Dec 11", "Government funding runs out", "Congress needs a deal or another stopgap to avoid a shutdown."],
-  ["January 2027", "New Congress convenes", "Democrats take control of both chambers, and the House elects its Speaker."],
+  ["Sun, Nov 29", "Spain votes in a snap election", "Called after the housing package failed in parliament.", "world"],
+  ["Tue, Dec 1", "Estonia closes its border with Russia", "All road crossings shut for at least six months.", "world"],
+  ["Tue, Dec 1", "Senate Democrats choose a leader", "Schumer vs. Van Hollen, by secret ballot.", "congress"],
+  ["Dec 8–9", "Federal Reserve meeting", "Markets are pricing in a quarter-point rate hike.", "economy"],
+  ["Fri, Dec 11", "Government funding runs out", "Congress needs a deal or another stopgap to avoid a shutdown.", "congress"],
+  ["January 2027", "New Congress convenes", "Democrats take control of both chambers, and the House elects its Speaker.", "congress"],
 ];
 
 const dayN = d => Math.round((Date.parse(d) - Date.parse(ELECTION)) / 864e5);
@@ -1023,13 +1025,20 @@ function apply(k) {
     markFirst(day);
   });
   document.getElementById("empty").hidden = any;
+  renderCal(k);
 }
 chips.addEventListener("click", e => { const b = e.target.closest(".chip"); if (b) apply(b.dataset.k); });
 try { localStorage.removeItem("stm-filter"); } catch (e) {}
 
 // Upcoming
-document.getElementById("cal").innerHTML = AHEAD.map(([t, h, s]) =>
-  `<li class="card"><time>${t}</time><strong>${esc(h)}</strong><span>${esc(s)}</span></li>`).join("");
+// Only dates in the selected topic are shown; the section hides when none match.
+function renderCal(k) {
+  const items = AHEAD.filter(([, , , cat]) => k === "all" || cat === k);
+  document.getElementById("cal").innerHTML = items.map(([t, h, s]) =>
+    `<li class="card"><time>${t}</time><strong>${esc(h)}</strong><span>${esc(s)}</span></li>`).join("");
+  document.querySelector(".ahead").hidden = items.length === 0;
+}
+renderCal("all");
 // "See more" shows every upcoming date; "See less" folds back to 6 (desktop) or 3 (phones).
 const calWrap = document.getElementById("cal-wrap"), moreBtn = calWrap.querySelector(".more");
 moreBtn.addEventListener("click", () => {
