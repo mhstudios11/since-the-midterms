@@ -341,20 +341,23 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .aside-note { margin: 0; font-size: 0.95rem; color: var(--ink-2); max-width: 46rem; }
 
 /* Coming up */
-/* Coming up: a row of small date cards between the topic chips and the newest day.
-   About 3.5 cards show at once, so the cut-off card hints that the row scrolls. Filters don't hide it. */
+/* Developing / coming up (Figma 165:7627): a centered label, a 3-column grid of equal-height date cards,
+   and a "See more" button. Shows 6 cards on desktop and 3 stacked on phones; the button reveals the rest.
+   Filters don't hide it. */
 .ahead { max-width: 1104px; margin-inline: auto; padding-top: 48px; }
-.ahead-h { font-family: var(--f-mono); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); margin: 0 0 12px; }
-.cal { min-width: 0; }
-.cal ul {
-  list-style: none; margin: 0 -8px; padding: 4px 8px 20px; display: grid; grid-auto-flow: column;
-  grid-auto-columns: calc((100% - 3 * 16px) / 3.5); gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory;
-  scroll-padding-inline: 8px; scrollbar-width: thin;
-}
-.cal li { scroll-snap-align: start; display: flex; flex-direction: column; gap: 6px; padding: 16px 20px 18px; }
-.cal time { font-family: var(--f-mono); font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--accent); font-variant-numeric: tabular-nums; }
+.ahead-h { font-family: var(--f-mono); font-size: 0.78rem; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-2); text-align: center; margin: 0 0 12px; }
+.cal ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 24px; }
+.cal li { display: flex; flex-direction: column; gap: 6px; padding: 16px; }
+.cal time { font-family: var(--f-mono); font-size: 0.78rem; letter-spacing: 0.5px; text-transform: uppercase; color: var(--accent); font-variant-numeric: tabular-nums; }
 .cal strong { font-weight: 700; font-size: 1rem; line-height: 1.3; }
 .cal span { display: block; color: var(--ink-2); font-size: 0.9rem; line-height: 1.45; }
+.cal.collapsed li:nth-child(n+7) { display: none; }
+.more { display: flex; align-items: center; gap: 8px; margin: 24px auto 0; height: 40px; padding: 8px 12px; border: 0; border-radius: 8px; background: none; cursor: pointer;
+  font: 500 1rem/1.5 var(--f-body); color: var(--nav-ink); }
+.more:hover { background: color-mix(in srgb, var(--accent) 9%, transparent); }
+.more .caret { width: 16px; height: 16px; background: currentColor; -webkit-mask: url("assets/caret-down.svg") center / 16px 16px no-repeat; mask: url("assets/caret-down.svg") center / 16px 16px no-repeat; transition: transform 0.2s; }
+.more[aria-expanded="true"] .caret { transform: rotate(180deg); }
+.cal:not(:has(li:nth-child(7))) .more { display: none; }
 
 /* Footer (Figma 129:6407, nodes 158:7599-7608): notes, a rule, then the centered credit line. */
 footer { max-width: 1192px; margin: 96px auto 0; padding-block: 32px 48px; border-top: 1px solid var(--rule); font-size: 0.875rem; line-height: 1.55; color: var(--ink-2); }
@@ -384,7 +387,9 @@ footer .credit a:hover { text-decoration: underline; }
   .stamp { font-size: 2rem; margin-bottom: 32px; }
   #days .day { padding-top: 40px; }
   .ahead { padding-top: 32px; }
-  .cal ul { grid-auto-columns: 78%; gap: 12px; }
+  .cal ul { grid-template-columns: 1fr; gap: 16px; }
+  .cal.collapsed li:nth-child(n+4) { display: none; }
+  .cal:has(li:nth-child(4)) .more { display: flex; }
   #days .day:not([hidden]) ~ .day:not([hidden]) { margin-top: 40px; }
   .voice { padding-top: 32px; gap: 32px; }
   .actions { justify-content: flex-start; }
@@ -428,8 +433,10 @@ footer .credit a:hover { text-decoration: underline; }
   </nav>
   <main class="wrap">
     <section class="ahead" aria-labelledby="ahead-h">
-      <h2 class="ahead-h" id="ahead-h">Coming up</h2>
-      <div class="cal"><ul id="cal"></ul></div>
+      <h2 class="ahead-h" id="ahead-h">Developing / coming up</h2>
+      <div class="cal collapsed" id="cal-wrap"><ul id="cal"></ul>
+        <button class="more" type="button" aria-expanded="false" aria-controls="cal"><span class="more-label">See more</span><span class="caret" aria-hidden="true"></span></button>
+      </div>
     </section>
     <div id="days"></div>
   </main>
@@ -1034,6 +1041,13 @@ try { localStorage.removeItem("stm-filter"); } catch (e) {}
 // Upcoming
 document.getElementById("cal").innerHTML = AHEAD.map(([t, h, s]) =>
   `<li class="card"><time>${t}</time><strong>${esc(h)}</strong><span>${esc(s)}</span></li>`).join("");
+// "See more" shows every upcoming date; "See less" folds back to 6 (desktop) or 3 (phones).
+const calWrap = document.getElementById("cal-wrap"), moreBtn = calWrap.querySelector(".more");
+moreBtn.addEventListener("click", () => {
+  const open = calWrap.classList.toggle("collapsed") === false;
+  moreBtn.setAttribute("aria-expanded", String(open));
+  moreBtn.querySelector(".more-label").textContent = open ? "See less" : "See more";
+});
 
 // Day counter follows the viewer's calendar date, never earlier than the newest event
 const now = new Date();
