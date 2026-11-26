@@ -38,6 +38,7 @@ img { max-width: 100%; }
   --c-world: #b5306b;
   --c-health: #4d7c0f;
   --c-outages: #c2410c;
+  --c-cleanser: #7a5c00;
   --seat-uncalled: #9aa5b8;
   --pill-ink: #43474f; --pill-gray: #eceff1; --pill-green: #e8f5e9; --pill-red: #ffebee; --pill-topic: #e8eaf6;
   --vote-bg: #f1f2f9; --road-todo: #d9def3; --road-halo: #cfd9f8;
@@ -56,7 +57,7 @@ img { max-width: 100%; }
     --paper: #0e131c; --sheet: #151c28; --ink: #e6eaf2; --ink-2: #9aa5b8; --rule: #2a3445; --accent: #7f9dff; --accent-ink: #0e131c;
     --shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.3), 0 16px 32px -4px rgba(0, 0, 0, 0.45);
     --c-elections: #7f9dff; --c-congress: #c39bf0; --c-whitehouse: #f08a80; --c-courts: #7cc9a2;
-    --c-iran: #f0b35c; --c-economy: #5cc6dd; --c-disaster: #a5afc0; --c-world: #f28dbb; --c-health: #a3d86b; --c-outages: #fb923c; --seat-uncalled: #4a5568;
+    --c-iran: #f0b35c; --c-economy: #5cc6dd; --c-disaster: #a5afc0; --c-world: #f28dbb; --c-health: #a3d86b; --c-outages: #fb923c; --c-cleanser: #e3c15c; --seat-uncalled: #4a5568;
     --pill-ink: #dfe3ec; --pill-gray: #263042; --pill-green: #1d3a28; --pill-red: #47222a; --pill-topic: #262f52; --vote-bg: #1b2333; --road-todo: #2e3a55; --road-halo: #33427a;
     --ink-3: #8f99ab; --nav-ink: #b9c8ff; --nav-bg: rgba(21, 28, 40, 0.85);
     --navm-sel: #b9c8ff; --navm-sel-ink: #0e131c; --nav-line: rgba(255, 255, 255, 0.08);
@@ -67,7 +68,7 @@ img { max-width: 100%; }
   --paper: #0e131c; --sheet: #151c28; --ink: #e6eaf2; --ink-2: #9aa5b8; --rule: #2a3445; --accent: #7f9dff; --accent-ink: #0e131c;
   --shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.3), 0 16px 32px -4px rgba(0, 0, 0, 0.45);
   --c-elections: #7f9dff; --c-congress: #c39bf0; --c-whitehouse: #f08a80; --c-courts: #7cc9a2;
-  --c-iran: #f0b35c; --c-economy: #5cc6dd; --c-disaster: #a5afc0; --c-world: #f28dbb; --c-health: #a3d86b; --c-outages: #fb923c; --seat-uncalled: #4a5568;
+  --c-iran: #f0b35c; --c-economy: #5cc6dd; --c-disaster: #a5afc0; --c-world: #f28dbb; --c-health: #a3d86b; --c-outages: #fb923c; --c-cleanser: #e3c15c; --seat-uncalled: #4a5568;
     --pill-ink: #dfe3ec; --pill-gray: #263042; --pill-green: #1d3a28; --pill-red: #47222a; --pill-topic: #262f52; --vote-bg: #1b2333; --road-todo: #2e3a55; --road-halo: #33427a;
     --ink-3: #8f99ab; --nav-ink: #b9c8ff; --nav-bg: rgba(21, 28, 40, 0.85);
     --navm-sel: #b9c8ff; --navm-sel-ink: #0e131c; --nav-line: rgba(255, 255, 255, 0.08);
@@ -575,6 +576,7 @@ const CATS = {
   world:      { label: "World",               c: "--c-world" },
   health:     { label: "Health",              c: "--c-health" },
   outages:    { label: "Outages",             c: "--c-outages" },
+  cleanser:   { label: "Palate cleanser",     c: "--c-cleanser" },
   people:     { label: "The people",          c: "--accent" },
 };
 
@@ -582,14 +584,26 @@ const ELECTION = "2026-11-03";
 
 const EVENTS = [
   // Nov 26
+  { d: "2026-11-26", cat: "iran", dev: true, h: "Two Italians are killed in a drone attack in Kuwait, and Iran denies it",
+    p: "Kuwait's defense ministry said two Italian technicians died of their injuries after drones it called Iranian targeted a vital site. It first reported four people wounded. Italy's foreign minister, Antonio Tajani, said the drone was made in Iran and that Italy would protest to Iran's embassy. Iran's armed forces denied carrying out any attack and called it a false flag. EU chief Ursula von der Leyen called for more pressure on Tehran.",
+    s: [["CNN","https://www.cnn.com/2026/11/26/middleeast/italians-killed-iranian-attack-kuwait-intl"],["CBC","https://www.cbc.ca/news/world/italian-workers-killed-kuwait-iran-strike-9.7437089"],["Al Jazeera","https://www.aljazeera.com/news/2026/11/26/two-italians-killed-after-iranian-drones-strike-facility-says-kuwait"]] },
+  { d: "2026-11-26", cat: "disaster", h: "The storm brings record tidal flooding to the Jersey Shore",
+    p: "Thursday morning's high tide broke Cape May's all-time flood record, set during a January 2016 storm. Delaware's Bowers Beach also hit a record high tide. Atlantic City and Ocean City saw their highest storm tides since Superstorm Sandy, though well below Sandy's. Atlantic City's mayor urged people in flood-prone areas to leave, and New Jersey is under a statewide state of emergency.",
+    s: [["WHYY","https://whyy.org/articles/thanksgiving-philly-region-noreaster-coastal-flooding-damaging-winds-power-outages/"],["The Weather Channel","https://weather.com/2026/11/25/holiday/thanksgiving/east-coast-thanksgiving-storm-wind-rain-flooding"]] },
+  { d: "2026-11-26", cat: "cleanser", h: "The wrong-number Thanksgiving text is becoming a Lifetime movie",
+    p: "In 2016, Arizona grandmother Wanda Dench texted a Thanksgiving invitation to the wrong number. It went to Jamal Hinton, then 17, who accepted, and he has joined her for Thanksgiving ever since. The two are working with Lifetime on a movie about their friendship, expected around next Thanksgiving.",
+    s: [["CNN","https://www.cnn.com/2026/11/26/us/viral-thanksgiving-text-tradition-lifetime"],["WCVB","https://www.wcvb.com/article/thanksgiving-duo-wrong-text-ten-years/74542691"],["The National Desk","https://thenationaldesk.com/news/americas-news-now/a-wrong-number-thanksgiving-text-sparked-a-decade-long-bond-now-its-a-lifetime-movie-jamal-hinton-wanda-dench-arizona-bonus-grandma-tradition"]] },
   { d: "2026-11-26", cat: "disaster", h: "A Thanksgiving storm knocks out power and cancels flights in the East",
     p: "The storm brought strong winds, heavy rain and coastal flooding to the mid-Atlantic and Northeast on Thursday. Hundreds of thousands of homes and businesses lost power, and Virginia was hit hardest. Hundreds of flights were canceled. Forecasters expect the storm to move into New England and Canada by Friday.",
     s: [["CNN","https://www.cnn.com/2026/11/24/us/live-news/thanksgiving-travel"],["Fox Weather","https://www.foxweather.com/live-news/poweful-thanksgiving-storms-west-east-coast-rain-wind-flood-november-2026"],["NBC News","https://www.nbcnews.com/weather/winter-weather/live-blog/live-updates-thanksgiving-travel-weather-storms-forecast-rcna611376"]] },
-  { d: "2026-11-26", cat: "iran", dev: true, h: "Iran claims two more tankers hit mines, and its drones strike Kuwait",
+  { d: "2026-11-26", cat: "iran", h: "Iran claims two more tankers hit mines, and its drones strike Kuwait",
     p: "Iran's Revolutionary Guard said two oil tankers hit sea mines north of the Omani port of Khasab on Thursday after crossing without Iran's permission. It said one was a supertanker. The claims have not been independently confirmed. Kuwait's army said Iranian drones targeted a vital site and falling shrapnel injured four people, including two Italians.",
     s: [["ABC News","https://abcnews.com/International/live-updates/iran-live-updates-tehran-strait-hormuz-safe-demands/?id=138369648"],["CBS News","https://www.cbsnews.com/live-updates/iran-war-us-military-ai-weapons-oil/"]] },
 
   // Nov 25
+  { d: "2026-11-25", cat: "courts", h: "A judge blocks Trump's second order limiting birthright citizenship",
+    p: "U.S. District Judge Christopher Cooper in Washington blocked the August order for everyone it covers while the case goes on. The order would deny citizenship to some U.S.-born children, including children of foreign government workers and children born through surrogacy. Cooper ruled the president cannot create new exceptions to birthright citizenship. A Maryland judge had already partly blocked the order, and the administration is expected to appeal.",
+    s: [["Fox News","https://www.foxnews.com/politics/trumps-birthright-citizenship-restrictions-struck-down-dc-federal-judge-called-hater"],["HuffPost","https://www.huffpost.com/entry/trump-birthright-citizenship_n_6b0740c4e4b01d8bd1db4758"],["Washington Examiner","https://www.washingtonexaminer.com/news/justice/4815735/judge-blocks-trump-second-attempt-birthright-citizenship/"]] },
   { d: "2026-11-25", cat: "disaster", h: "The Macy's parade is postponed to Saturday because of the storm",
     p: "Macy's and New York City officials moved the 100th parade to Saturday at 8:30 a.m. Eastern. Forecasts called for high winds and coastal flooding on Thanksgiving. It is the first time the parade has been postponed for weather. The balloons were deflated Wednesday night and will be prepared again for Saturday.",
     s: [["NBC News","https://www.nbcnews.com/news/us-news/macys-thanksgiving-day-parade-weather-delay-rcna611355"],["ABC7 New York","https://abc7ny.com/story/will-macys-parade-balloons-fly-storm-wind-rain-puts-doubt/20078423/"]] },
