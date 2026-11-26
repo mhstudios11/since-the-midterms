@@ -344,7 +344,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 /* Developing / coming up (Figma 165:7627): a centered label, a 3-column grid of equal-height date cards,
    and a "See more" button. Shows 6 cards on desktop and 3 stacked on phones; the button reveals the rest.
    Filters don't hide it. */
-.ahead { max-width: 1104px; margin-inline: auto; padding-top: 48px; }
+.ahead { max-width: 1104px; margin-inline: auto; padding-top: 64px; padding-bottom: 16px; }
 .ahead-h { font-family: var(--f-mono); font-size: 0.78rem; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-2); text-align: center; margin: 0 0 12px; }
 .cal ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 24px; }
 .cal li { display: flex; flex-direction: column; gap: 6px; padding: 16px; }
@@ -386,7 +386,7 @@ footer .credit a:hover { text-decoration: underline; }
   header.mast { padding-top: 40px; }
   .stamp { font-size: 2rem; margin-bottom: 32px; }
   #days .day { padding-top: 40px; }
-  .ahead { padding-top: 32px; }
+  .ahead { padding-top: 48px; }
   .cal ul { grid-template-columns: 1fr; gap: 16px; }
   .cal.collapsed li:nth-child(n+4) { display: none; }
   .cal:has(li:nth-child(4)) .more { display: flex; }
