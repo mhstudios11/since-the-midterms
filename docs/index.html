@@ -425,7 +425,7 @@ footer .credit a:hover { text-decoration: underline; }
 
 <div class="wrap">
   <header class="mast" id="mast">
-    <div class="eyebrow"><span>U.S. midterms · Nov 3, 2026</span><span>Updated Thu, Nov 26</span></div>
+    <div class="eyebrow"><span>U.S. midterms · Nov 3, 2026</span><span>Updated Fri, Nov 27</span></div>
     <h1 id="mast-h">Since the Midterms: <span class="count" id="daycount">Day 14</span></h1>
     <p class="lede" id="mast-lede">Democrats won both chambers of Congress on November 3. Here is what has happened since then, at home and around the world: late race calls, a new fight in Washington, the Iran war, and the news that hasn't stopped. Newest first, with sources on every item.</p>
   </header>
@@ -583,8 +583,22 @@ const CATS = {
 const ELECTION = "2026-11-03";
 
 const EVENTS = [
+  // Nov 27
+  { d: "2026-11-27", cat: "iran", dev: true, h: "Iran says another tanker hit a mine and claims it took back two seized tankers",
+    p: "Iran's Revolutionary Guard said an unidentified tanker hit a sea mine in the Strait of Hormuz on Friday while using what it called an unauthorized route, and that a second tanker turned back. Maritime agencies did not immediately confirm the claim. Iran's navy commander, Shahram Irani, also said Iranian forces recovered two Iranian oil tankers he said the U.S. military had stolen. He offered no evidence, and the U.S. has not announced seizing any Iran-linked ships since April.",
+    s: [["CBS News","https://www.cbsnews.com/live-updates/iran-war-trump-us-threats-diplomacy-strait-of-hormuz/"],["Al Jazeera","https://www.aljazeera.com/news/liveblog/2026/11/27/iran-war-live-irans-araghchi-calls-deadly-kuwait-attack-suspicious"]] },
+  { d: "2026-11-27", cat: "cleanser", h: "A Texas high school band raises $350,000 to stay for the delayed Macy's parade",
+    p: "When the storm pushed the Macy's parade to Saturday, the Pride of Pearland marching band faced the cost of two more nights in New York. The school district said donors helped it reach its $350,000 goal, covering hotels, meals and buses home. Bands from Tennessee and South Carolina also said they raised what they needed to stay.",
+    s: [["CBS News","https://www.cbsnews.com/news/macys-thanksgiving-parade-marching-bands-delay-cost/"],["ABC13 Houston","https://abc13.com/post/macys-thanksgiving-day-parade-date-change-creates-400k-hurdle-pearland-high-school-band-district-says/20082535/"]] },
+
   // Nov 26
-  { d: "2026-11-26", cat: "iran", dev: true, h: "Two Italians are killed in a drone attack in Kuwait, and Iran denies it",
+  { d: "2026-11-26", cat: "disaster", dev: true, h: "The EPA says it has found no airborne lead since the Iowa detonation",
+    p: "The EPA said Thursday that its air monitors had detected no airborne lead across the region since the Army's detonation. It has collected more than 1,000 air, water, soil and dust samples since the blast and expects the first lab results as early as Friday. Experts say more testing is needed to be sure the area is safe.",
+    s: [["CBS News","https://www.cbsnews.com/news/iowa-lead-detonation-epa-testing-results-soon/"],["Fox News","https://www.foxnews.com/us/epa-reports-zero-detection-airborne-lead-day-after-iowa-lead-azide-detonation"]] },
+  { d: "2026-11-26", cat: "economy", h: "Trump demands a probe of GDP numbers released before the midterms",
+    p: "On Thanksgiving, Trump claimed without evidence that \"fake\" economic numbers came out before the election and called for an investigation. The Commerce Department on Wednesday revised third-quarter growth up to 4.3% from its first estimate of 3.4%. The department routinely revises its early estimates as more data comes in.",
+    s: [["CBS News","https://www.cbsnews.com/news/trump-thanksgiving-commerce-department-gdp-investigation/"],["HuffPost (Reuters)","https://www.huffpost.com/entry/trump-probe-gdp-data-midterms_n_6b08d6efe4b01d8bd1dbcce0"]] },
+  { d: "2026-11-26", cat: "iran", h: "Two Italians are killed in a drone attack in Kuwait, and Iran denies it",
     p: "Kuwait's defense ministry said two Italian technicians died of their injuries after drones it called Iranian targeted a vital site. It first reported four people wounded. Italy's foreign minister, Antonio Tajani, said the drone was made in Iran and that Italy would protest to Iran's embassy. Iran's armed forces denied carrying out any attack and called it a false flag. EU chief Ursula von der Leyen called for more pressure on Tehran.",
     s: [["CNN","https://www.cnn.com/2026/11/26/middleeast/italians-killed-iranian-attack-kuwait-intl"],["CBC","https://www.cbc.ca/news/world/italian-workers-killed-kuwait-iran-strike-9.7437089"],["Al Jazeera","https://www.aljazeera.com/news/2026/11/26/two-italians-killed-after-iranian-drones-strike-facility-says-kuwait"]] },
   { d: "2026-11-26", cat: "disaster", h: "The storm brings record tidal flooding to the Jersey Shore",
@@ -601,13 +615,19 @@ const EVENTS = [
     s: [["ABC News","https://abcnews.com/International/live-updates/iran-live-updates-tehran-strait-hormuz-safe-demands/?id=138369648"],["CBS News","https://www.cbsnews.com/live-updates/iran-war-us-military-ai-weapons-oil/"]] },
 
   // Nov 25
+  { d: "2026-11-25", cat: "courts", h: "A judge blocks the FCC's early review of ABC's station licenses",
+    p: "U.S. District Judge Loren AliKhan temporarily barred the FCC from moving ahead with an early review of ABC's broadcast licenses. She found ABC is likely to show the review was retaliation for its speech, which the First Amendment forbids. The order holds while ABC's lawsuit proceeds.",
+    s: [["CBS News","https://www.cbsnews.com/news/judge-temporarily-blocks-fcc-from-reviewing-abc-licenses/"],["PBS NewsHour (AP)","https://www.pbs.org/newshour/nation/judge-blocks-fcc-from-early-license-review-for-abc-which-network-says-has-had-a-chilling-effect"]] },
+  { d: "2026-11-25", cat: "world", h: "A fuel tanker fire kills 31 people on a highway near Cairo",
+    p: "A fuel tanker crashed and caught fire on Cairo's Ring Road in Giza on Wednesday evening, Egyptian authorities said. At least 31 people were killed. Prosecutors ordered a young driver detained on suspicion of causing the crash.",
+    s: [["CNN","https://www.cnn.com/2026/11/25/middleeast/cairo-egypt-tanker-fire-latam-intl"],["Al Jazeera","https://www.aljazeera.com/news/2026/11/26/egypt-detains-driver-over-cairo-fuel-tanker-fire-that-killed-31"]] },
   { d: "2026-11-25", cat: "courts", h: "A judge blocks Trump's second order limiting birthright citizenship",
     p: "U.S. District Judge Christopher Cooper in Washington blocked the August order for everyone it covers while the case goes on. The order would deny citizenship to some U.S.-born children, including children of foreign government workers and children born through surrogacy. Cooper ruled the president cannot create new exceptions to birthright citizenship. A Maryland judge had already partly blocked the order, and the administration is expected to appeal.",
     s: [["Fox News","https://www.foxnews.com/politics/trumps-birthright-citizenship-restrictions-struck-down-dc-federal-judge-called-hater"],["HuffPost","https://www.huffpost.com/entry/trump-birthright-citizenship_n_6b0740c4e4b01d8bd1db4758"],["Washington Examiner","https://www.washingtonexaminer.com/news/justice/4815735/judge-blocks-trump-second-attempt-birthright-citizenship/"]] },
   { d: "2026-11-25", cat: "disaster", h: "The Macy's parade is postponed to Saturday because of the storm",
     p: "Macy's and New York City officials moved the 100th parade to Saturday at 8:30 a.m. Eastern. Forecasts called for high winds and coastal flooding on Thanksgiving. It is the first time the parade has been postponed for weather. The balloons were deflated Wednesday night and will be prepared again for Saturday.",
     s: [["NBC News","https://www.nbcnews.com/news/us-news/macys-thanksgiving-day-parade-weather-delay-rcna611355"],["ABC7 New York","https://abc7ny.com/story/will-macys-parade-balloons-fly-storm-wind-rain-puts-doubt/20078423/"]] },
-  { d: "2026-11-25", cat: "disaster", dev: true, h: "The Army blows up nearly five tons of lead azide in Iowa",
+  { d: "2026-11-25", cat: "disaster", h: "The Army blows up nearly five tons of lead azide in Iowa",
     p: "The Army detonated the degraded lead azide at the Iowa Army Ammunition Plant near Middletown on Wednesday morning. Officials said the blast went as planned and that the risk of an unplanned explosion is gone. Gov. Kim Reynolds praised the operation. Residents had been told to stay indoors. The EPA said its real-time air monitors detected no airborne lead after the blast. Officials said testing of soil and surfaces will continue.",
     s: [["NPR","https://www.npr.org/2026/11/25/nx-s1-6052338/army-detonation-lead-explosives-iowa"],["ABC News","https://abcnews.com/US/iowa-detonation-lead-azide-army/story?id=138425051"],["Fox News","https://www.foxnews.com/live-news/army-detonation-lead-azide-middletown-iowa-11-25-26"],["CNN","https://www.cnn.com/2026/11/25/us/live-news/iowa-lead-azide-detonation"],["KCRG","https://www.kcrg.com/2026/11/25/happening-today-army-detonate-lead-azide-iowa-ammunition-plant/"],["PBS NewsHour","https://www.pbs.org/newshour/nation/watch-live-army-offers-update-after-detonating-lead-azide-stockpile-in-iowa"]] },
   { d: "2026-11-25", cat: "courts", h: "Kilmar Abrego Garcia leaves the U.S. for Spain",
