@@ -425,7 +425,7 @@ footer .credit a:hover { text-decoration: underline; }
 
 <div class="wrap">
   <header class="mast" id="mast">
-    <div class="eyebrow"><span>U.S. midterms · Nov 3, 2026</span><span>Updated Fri, Nov 27</span></div>
+    <div class="eyebrow"><span>U.S. midterms · Nov 3, 2026</span><span>Updated Sat, Nov 28</span></div>
     <h1 id="mast-h">Since the Midterms: <span class="count" id="daycount">Day 14</span></h1>
     <p class="lede" id="mast-lede">Democrats won both chambers of Congress on November 3. Here is what has happened since then, at home and around the world: late race calls, a new fight in Washington, the Iran war, and the news that hasn't stopped. Newest first, with sources on every item.</p>
   </header>
@@ -583,10 +583,24 @@ const CATS = {
 const ELECTION = "2026-11-03";
 
 const EVENTS = [
+  // Nov 28
+  { d: "2026-11-28", cat: "cleanser", h: "The 100th Macy's parade finally marches, two days late",
+    p: "The Macy's Thanksgiving Day Parade stepped off in Manhattan on Saturday morning after the storm forced the first weather postponement in its history. Calmer weather was forecast for the rescheduled date. Several out-of-town bands that had scrambled to extend their stays said they would march after all, though a few performers could not make the new date.",
+    s: [["Yahoo News","https://www.yahoo.com/news/us/live/macys-thanksgiving-day-parade-postponed-until-saturday-due-to-severe-weather--follow-live-updates-214611617.html"],["ABC News","https://abcnews.com/GMA/Living/weather-delayed-100th-macys-thanksgiving-day-parade/story?id=138486032"],["CBS New York","https://www.cbsnews.com/newyork/news/macys-thanksgiving-day-parade-2026-how-to-watch/"]] },
+  { d: "2026-11-28", cat: "economy", h: "Black Friday online sales top $13 billion, a record",
+    p: "Americans spent more than $13 billion online on Black Friday, a record, according to Adobe Analytics. Retailers offered deep discounts on electronics, toys, clothes and appliances. Analysts say higher prices account for much of the growth, as inflation and high gas prices squeeze household budgets.",
+    s: [["U.S. News (Reuters)","https://www.usnews.com/news/world/articles/2026-11-28/black-friday-online-shopping-rises-to-13-1-billion-in-the-us-adobe-analytics-data-shows"],["CNBC","https://www.cnbc.com/2026/11/27/black-friday-2026-inflation-value-deals.html"]] },
+
   // Nov 27
   { d: "2026-11-27", cat: "iran", dev: true, h: "Kuwait summons Iran's ambassador over the drone attack that killed two Italians",
     p: "Kuwait summoned Iran's ambassador on Friday to protest Thursday's drone strike, which killed two Italian technicians working at a Kuwaiti military site. Kuwait condemned what it called continued Iranian attacks and said it reserves the right to defend itself. Iran denies any role. Foreign Minister Abbas Araghchi called the attack suspicious and offered to work with Kuwait and Italy to find out what happened.",
     s: [["Yahoo News (DPA)","https://www.yahoo.com/news/world/articles/kuwait-summons-irans-ambassador-drone-160337044.html"],["CNBC","https://www.cnbc.com/2026/11/27/us-iran-war-trump-hormuz-italian-killed-trump.html"],["Al Jazeera","https://www.aljazeera.com/news/liveblog/2026/11/27/iran-war-live-irans-araghchi-calls-deadly-kuwait-attack-suspicious"]] },
+  { d: "2026-11-27", cat: "outages", dev: true, h: "Hackers break into the Air Force's Cloud One computing platform",
+    p: "Reuters first reported that hackers breached Cloud One, the Air Force's flagship cloud platform, and NBC News confirmed it. The platform runs apps for personnel actions, payroll, logistics and maintenance. It is not known who the hackers are or whether data was taken. The Air Force said it does not comment on the security of specific systems. It is the latest in a string of reported hacks of federal systems, including the FBI and the CIA.",
+    s: [["CNBC (Reuters)","https://www.cnbc.com/2026/11/27/hackers-breach-us-air-force-flagship-cloud-one-computing-platform.html"],["NBC News","https://www.nbcnews.com/news/us-news/hackers-attack-penetrate-air-forces-computing-platform-rcna611559"],["The Hill","https://thehill.com/policy/defense/6245197-air-force-cloud-one-hack/"]] },
+  { d: "2026-11-27", cat: "iran", h: "U.S. forces disable a cargo ship trying to run the blockade of Iran",
+    p: "Central Command said a U.S. aircraft fired precision munitions at the stern of the Palau-flagged M/V Pacific Archer in the Gulf of Oman on Thanksgiving, after its crew ignored repeated warnings. The ship had left Iran's Bandar Abbas port. Its engines were disabled and the civilian crew was not hurt. CENTCOM says it has turned back 158 ships and disabled six since the blockade began.",
+    s: [["CBS News","https://www.cbsnews.com/live-updates/iran-war-trump-us-threats-diplomacy-strait-of-hormuz/"],["The Hill","https://thehill.com/policy/defense/6245428-us-naval-blockade-iran-ship-disabled/"]] },
   { d: "2026-11-27", cat: "world", h: "EU leaders end budget talks without a deal, leaving a Ukraine loan in limbo",
     p: "European Union leaders talked for more than 12 hours in Brussels but could not agree on the bloc's 2028 to 2034 budget. The package included a proposed 45 billion euro loan for Ukraine. Germany wants deeper cuts and wants every member to back the loan, while other countries resist cuts. Leaders plan to try again at a summit Dec. 17 and 18.",
     s: [["Euronews","https://www.euronews.com/2026/11/27/eu-budget-summit-collapses-as-row-over-money-exposes-clash-over-europes-strategic-tasks"],["Washington Times (AP)","https://washingtontimes.com/news/2026/nov/27/ukraine-loan-limbo-eu-budget-talks-stall-leaders-try-3-weeks"]] },
@@ -1016,10 +1030,10 @@ const RACES_NOTABLE = [
 
 // [date, event, note, topic]. The topic uses the same keys as the chips, so filters show only matching dates.
 const AHEAD = [
-  ["Sat, Nov 28", "The Macy's Thanksgiving Day Parade", "The 100th parade, moved from Thursday because of the storm.", "disaster"],
   ["Sun, Nov 29", "Spain votes in a snap election", "Called after the housing package failed in parliament.", "world"],
   ["Tue, Dec 1", "Estonia closes its border with Russia", "All road crossings shut for at least six months.", "world"],
   ["Tue, Dec 1", "Senate Democrats choose a leader", "Schumer vs. Van Hollen, by secret ballot.", "congress"],
+  ["Wed, Dec 2", "Supreme Court hears AR-15 ban challenges", "Cases on Illinois and Connecticut bans on AR-15-style rifles.", "courts"],
   ["Dec 8–9", "Federal Reserve meeting", "Markets are pricing in a quarter-point rate hike.", "economy"],
   ["Fri, Dec 11", "Government funding runs out", "Congress needs a deal or another stopgap to avoid a shutdown.", "congress"],
   ["Dec 17–18", "EU leaders try again on the budget", "The 2028–2034 budget and a 45 billion euro Ukraine loan.", "world"],
